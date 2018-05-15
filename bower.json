@@ -1,0 +1,22 @@
+{
+  "name": "self-sorting-vra",
+  "authors": [
+    "jeffreyshen19 <jshen@andover.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^5.0.13",
+    "jquery": "^3.3.1",
+    "d3": "4.13.0"
+  }
+}

@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "gotham_bold";
+  src: url("../../assets/fonts/gotham_bold/Gotham\ Bold.otf");
+}
+
+@font-face {
+  font-family: "libre_baskerville";
+  src: url("../../assets/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf");
+}
+
+@font-face {
+  font-family: "libre_baskerville";
+  src: url("../../assets/fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "libre_baskerville";
+  font-style: italic;
+  src: url("../../assets/fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf");
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: "gotham_bold";
+}
+
+h1{
+  font-size: 2em;
+}
+
+h2{
+  font-size: 1.5em;
+}
+
+h3{
+  font-size: 1.25em;
+}
+
+p{
+  font-family: "libre_baskerville";
+}
+
+i{
+  font-style: italic;
+}
+
+strong{
+  font-weight: bold;
+}

@@ -1,5 +1,8 @@
 import sys
 
+# Seats-votes curve generator
+# Done using uniform partisan swing
+
 fileToRead = open(sys.argv[1],"r")
 demFile = open(sys.argv[2] + "-dem.csv","w")
 repFile = open(sys.argv[2] + "-rep.csv","w")
@@ -11,6 +14,7 @@ seatsVotesDem = []
 
 SWING_CONST = 0.02 #Percentage to increase each district by
 
+# Read all district data
 for lineStr in csv:
     if len(lineStr) > 0:
         line = lineStr.split(",")
@@ -18,14 +22,21 @@ for lineStr in csv:
         line[1] = int(line[1])
 
         votingByDistrict.append({"rep": line[0], "dem": line[1], "total": line[0] + line[1]})
+
+# Calculate partisan swing
+repIncreasing = True
+repDecreasing = True
+demIncreasing = True
+demDecreasing = True
 i = 0
 
-while True:
-    #Increase by SWING_CONST
+while repIncreasing or repDecreasing or demIncreasing or demDecreasing:
+    #Rep increase
     repVotes = 0
     demVotes = 0
     repSeats = 0
     demSeats = 0
+
     for j in range(0,len(votingByDistrict)):
         district = votingByDistrict[j]
         repVote = round((SWING_CONST * i + float(district["rep"]) / district["total"]) * district["total"])
@@ -39,14 +50,11 @@ while True:
     repVotePercentage = float(100 * repVotes) / (repVotes + demVotes)
     repSeatPercentage = float(100 * repSeats) / (repSeats + demSeats)
     if repVotePercentage > 100:
-        break
-    seatsVotesRep.append({"votes": repVotePercentage, "seats": repSeatPercentage})
-    i += 1
+        repIncreasing = False
+    else:
+        seatsVotesRep.append({"votes": repVotePercentage, "seats": repSeatPercentage})
 
-i = 0
-
-while True:
-    #Decrease by SWING_CONST
+    #Rep decrease
     repVotes = 0
     demVotes = 0
     repSeats = 0
@@ -64,14 +72,11 @@ while True:
     repVotePercentage = float(100 * repVotes) / (repVotes + demVotes)
     repSeatPercentage = float(100 * repSeats) / (repSeats + demSeats)
     if repVotePercentage < 0:
-        break
-    seatsVotesRep.append({"votes": repVotePercentage, "seats": repSeatPercentage})
-    i += 1
+        repDecreasing = False
+    else:
+        seatsVotesRep.append({"votes": repVotePercentage, "seats": repSeatPercentage})
 
-i = 0
-
-while True:
-    #Increase by SWING_CONST
+    #Dem increase
     repVotes = 0
     demVotes = 0
     repSeats = 0
@@ -90,14 +95,11 @@ while True:
     demVotePercentage = float(100 * demVotes) / (repVotes + demVotes)
     demSeatPercentage = float(100 * demSeats) / (repSeats + demSeats)
     if demVotePercentage > 100:
-        break
-    seatsVotesDem.append({"votes": demVotePercentage, "seats": demSeatPercentage})
-    i += 1
+        demIncreasing = False
+    else:
+        seatsVotesDem.append({"votes": demVotePercentage, "seats": demSeatPercentage})
 
-i = 0
-
-while True:
-    #Decrease by SWING_CONST
+    #Dem decrease
     repVotes = 0
     demVotes = 0
     repSeats = 0
@@ -115,12 +117,11 @@ while True:
     demVotePercentage = float(100 * demVotes) / (repVotes + demVotes)
     demSeatPercentage = float(100 * demSeats) / (repSeats + demSeats)
     if demVotePercentage < 0:
-        break
-    seatsVotesDem.append({"votes": demVotePercentage, "seats": demSeatPercentage})
-    i += 1
+        demDecreasing = False
+    else:
+        seatsVotesDem.append({"votes": demVotePercentage, "seats": demSeatPercentage})
 
-print len(seatsVotesDem)
-print len(seatsVotesRep)
+    i += 1
 
 seatsVotesRep = sorted(seatsVotesRep, key=lambda svpair: svpair["votes"])
 seatsVotesDem = sorted(seatsVotesDem, key=lambda svpair: svpair["votes"])

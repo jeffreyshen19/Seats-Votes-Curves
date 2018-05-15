@@ -30,6 +30,12 @@ demIncreasing = True
 demDecreasing = True
 i = 0
 
+# Add end points
+seatsVotesRep.append({"votes": 0, "seats": 0})
+seatsVotesDem.append({"votes": 0, "seats": 0})
+seatsVotesRep.append({"votes": 100, "seats": 100})
+seatsVotesDem.append({"votes": 100, "seats": 100})
+
 while repIncreasing or repDecreasing or demIncreasing or demDecreasing:
     #Rep increase
     repVotes = 0

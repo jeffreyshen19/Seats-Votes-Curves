@@ -34,8 +34,6 @@ for lineStr in csv:
 
 repVoteShare = float(totalRepVotes) / totalVotes
 demVoteShare = float(totalDemVotes) / totalVotes
-i = repVoteShare
-counter = 0
 
 # Add endpoints
 seatsVotesRep.append({"seats": 0, "votes": 0})
@@ -43,34 +41,50 @@ seatsVotesRep.append({"seats": 1, "votes": 1})
 seatsVotesDem.append({"seats": 0, "votes": 0})
 seatsVotesDem.append({"seats": 1, "votes": 1})
 
+i = repVoteShare
+counter = 0
 while i <= 1:
     totalRepSeats = 0
+    totalDemSeats = 0
     for j in range(0,1000):
         repSeats = 0
+        demSeats = 0
+
         for district in votingByDistrict:
             percentRepUpdated = district["percentRep"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
             if percentRepUpdated > 0.50:
                 repSeats += 1
+            percentDemUpdated = district["percentDem"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
+            if percentDemUpdated > 0.50:
+                demSeats += 1
         totalRepSeats += repSeats
+        totalDemSeats += demSeats
 
     i += SWING_CONST
     counter += 1
 
     if i <= 1:
         seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
+        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": 1 - i})
 
 i = demVoteShare
 counter = 0
 
 while i <= 1:
     totalDemSeats = 0
+    totalRepSeats = 0
 
     for j in range(0,1000):
         demSeats = 0
+        repSeats = 0
         for district in votingByDistrict:
             percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
             if percentDemUpdated > 0.50:
                 demSeats += 1
+            percentRepUpdated = district["percentRep"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
+            if percentRepUpdated > 0.50:
+                repSeats += 1
+        totalRepSeats += repSeats
         totalDemSeats += demSeats
 
     i += SWING_CONST
@@ -78,46 +92,7 @@ while i <= 1:
 
     if i <= 1:
         seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
-
-i = repVoteShare
-counter = 0
-
-while i >= 0:
-    totalRepSeats = 0
-    for j in range(0,1000):
-        repSeats = 0
-        for district in votingByDistrict:
-            percentRepUpdated = district["percentRep"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
-            if percentRepUpdated > 0.50:
-                repSeats += 1
-        totalRepSeats += repSeats
-
-    i -= SWING_CONST
-    counter += 1
-
-    if i >= 0:
-        seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
-
-i = demVoteShare
-counter = 0
-
-while i >= 0:
-    totalDemSeats = 0
-
-    for j in range(0,1000):
-        demSeats = 0
-        for district in votingByDistrict:
-            percentDemUpdated = district["percentDem"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
-            if percentDemUpdated > 0.50:
-                demSeats += 1
-        totalDemSeats += demSeats
-
-    i -= SWING_CONST
-    counter += 1
-
-    if i >= 0:
-        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
-
+        seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": 1 - i})
 
 seatsVotesRep = sorted(seatsVotesRep, key=lambda svpair: svpair["votes"])
 seatsVotesDem = sorted(seatsVotesDem, key=lambda svpair: svpair["votes"])

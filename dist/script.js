@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 20, bottom: 50, left: 60},
+var margin = {top: 40, right: 20, bottom: 60, left: 60},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -13,6 +13,8 @@ function drawCurve(id){
   //Make graph
   var tooltip = d3.select("#" + id).select(".tooltip");
   var mouseX;
+
+  var dataset = d3.select("#" + id).node().dataset;
 
   d3.select("#" + id).select('svg').selectAll("*").remove(); //Clear all past graph drawings
   var svg = d3.select("#" + id).select("svg")
@@ -44,9 +46,14 @@ function drawCurve(id){
     .call(d3.axisBottom(x).ticks(5).tickFormat(function(d){return d + "%";}));
 
   svg.append("text")
-    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 10) + ")")
     .attr("class", "axis-label")
     .text("Percentage of Vote");
+
+  svg.append("text")
+    .attr("transform", "translate(" + (width / 2) + " ,-20)")
+    .attr("class", "axis-label")
+    .text("Seats-Votes Curve for " + dataset.state + " in " + dataset.year);
 
   //Add y axis w/ label
   svg.append("g")

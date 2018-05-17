@@ -6,6 +6,7 @@ var red = "#D64541",
     blue = "#446CB3";
 
 function drawCurve(id){
+  console.log(id);
   //Scale from 0 to 100%
   var x = d3.scaleLinear().range([0, width]).domain([0, 100]);
   var y = d3.scaleLinear().range([height, 0]).domain([0, 100]);
@@ -67,7 +68,7 @@ function drawCurve(id){
     .attr("class", "axis-label")
     .text("Percentage of Seats");
 
-  d3.csv("../data/seats-votes/" + id + ".csv", function(error, data){
+  d3.csv("../data/seats-votes/" + dataset.year + "/" + id + ".csv", function(error, data){
     data.forEach(function(d){
       d.votesR = parseFloat(d.votesR);
       d.seatsR = parseFloat(d.seatsR);
@@ -99,4 +100,4 @@ function drawCurve(id){
   });
 }
 
-drawCurve("test");
+//drawCurve("test");

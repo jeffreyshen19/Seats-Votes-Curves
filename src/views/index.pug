@@ -11,9 +11,10 @@ html(lang='en')
     link(href='dist/CSS/main.css', rel='stylesheet', type='text/css')
   body
     #wrapper
-      #test.graph(data-state = "State" data-year = "2016")
-        .tooltip.hidden 
-        svg        
+      each state in ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC", "ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+        a(onclick = "drawCurve('" + state + "')")= state
+        div(id = state data-state = state data-year = "2016").graph
+          svg    
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")
     script(src = "./dist/script-min.js")

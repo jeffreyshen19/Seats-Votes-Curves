@@ -1,1 +1,1 @@
-drawCurve("test");
+//drawCurve("test");

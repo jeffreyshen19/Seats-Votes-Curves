@@ -60,16 +60,22 @@ function drawCurve(id){
     .attr("class", "axis-label")
     .text("Percentage of Seats");
 
-  d3.csv("../data/seats-votes/" + id + "-rep.csv", function(error, data){
+  d3.csv("../data/seats-votes/" + id + ".csv", function(error, data){
     data.forEach(function(d){
-      d.votes = parseFloat(d.votes);
-      d.seats = parseFloat(d.seats);
+      d.votesR = parseFloat(d.votesR);
+      d.seatsR = parseFloat(d.seatsR);
+      d.votesD = parseFloat(d.votesD);
+      d.seatsD = parseFloat(d.seatsD);
     });
 
     //Set up lines
     var republicanLine = d3.line()
-      .x(function(d) { return x(d.votes); })
-      .y(function(d) { return y(d.seats); });
+      .x(function(d) { return x(d.votesR); })
+      .y(function(d) { return y(d.seatsR); });
+
+    var democraticLine = d3.line()
+      .x(function(d) { return x(d.votesD); })
+      .y(function(d) { return y(d.seatsD); });
 
     //Add both lines
     svg.append("path")
@@ -77,17 +83,6 @@ function drawCurve(id){
       .style("stroke", red)
       .attr("class", "line")
       .attr("d", republicanLine);
-  });
-
-  d3.csv("../data/seats-votes/" + id + "-dem.csv", function(error, data){
-    data.forEach(function(d){
-      d.votes = parseFloat(d.votes);
-      d.seats = parseFloat(d.seats);
-    });
-
-    var democraticLine = d3.line()
-      .x(function(d) { return x(d.votes); })
-      .y(function(d) { return y(d.seats); });
 
     svg.append("path")
       .data([data])

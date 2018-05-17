@@ -5,8 +5,7 @@ import random
 # Done using uniform partisan swing
 
 fileToRead = open(sys.argv[1],"r")
-demFile = open(sys.argv[2] + "-dem.csv","w")
-repFile = open(sys.argv[2] + "-rep.csv","w")
+fileToWrite = open(sys.argv[2] + ".csv","w")
 csv = fileToRead.read().split("\n")
 
 votingByDistrict = []
@@ -123,15 +122,9 @@ while i >= 0:
 seatsVotesRep = sorted(seatsVotesRep, key=lambda svpair: svpair["votes"])
 seatsVotesDem = sorted(seatsVotesDem, key=lambda svpair: svpair["votes"])
 
-repFile.write("votes,seats\n")
-demFile.write("votes,seats\n")
-
-for svpair in seatsVotesRep:
-    repFile.write(str(100 * svpair["votes"]) + "," + str(100 * svpair["seats"]) + "\n")
-
-for svpair in seatsVotesDem:
-    demFile.write(str(100 * svpair["votes"]) + "," + str(100 * svpair["seats"]) + "\n")
+fileToWrite.write("votesR,seatsR,votesD,seatsD\n")
+for i in range(0, len(seatsVotesDem)):
+    fileToWrite.write(str(100 * seatsVotesRep[i]["votes"]) + "," + str(100 * seatsVotesRep[i]["seats"]) + "," + str(100 * seatsVotesDem[i]["votes"]) + "," + str(100 * seatsVotesDem[i]["seats"]) + "\n")
 
 fileToRead.close()
-repFile.close()
-demFile.close()
+fileToWrite.close()

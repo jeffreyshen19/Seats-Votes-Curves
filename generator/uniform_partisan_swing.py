@@ -1,4 +1,5 @@
 import sys
+import random
 
 # Seats-votes curve generator
 # Done using uniform partisan swing
@@ -44,65 +45,80 @@ seatsVotesDem.append({"seats": 0, "votes": 0})
 seatsVotesDem.append({"seats": 1, "votes": 1})
 
 while i <= 1:
-    repSeats = 0
-    for district in votingByDistrict:
-        percentRepUpdated = district["percentRep"] + counter * SWING_CONST
-        if percentRepUpdated > 0.50:
-            repSeats += 1
+    totalRepSeats = 0
+    for j in range(0,1000):
+        repSeats = 0
+        for district in votingByDistrict:
+            percentRepUpdated = district["percentRep"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
+            if percentRepUpdated > 0.50:
+                repSeats += 1
+        totalRepSeats += repSeats
 
-    i += 0.01
+    i += SWING_CONST
     counter += 1
 
     if i <= 1:
-        seatsVotesRep.append({"seats": float(repSeats) / len(votingByDistrict), "votes": i})
+        seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
 
 i = demVoteShare
 counter = 0
 
 while i <= 1:
-    demSeats = 0
-    for district in votingByDistrict:
-        percentDemUpdated = district["percentDem"] + counter * SWING_CONST
-        if percentDemUpdated > 0.50:
-            demSeats += 1
+    totalDemSeats = 0
 
-    i += 0.01
+    for j in range(0,1000):
+        demSeats = 0
+        for district in votingByDistrict:
+            percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
+            if percentDemUpdated > 0.50:
+                demSeats += 1
+        totalDemSeats += demSeats
+
+    i += SWING_CONST
     counter += 1
 
     if i <= 1:
-        seatsVotesDem.append({"seats": float(demSeats) / len(votingByDistrict), "votes": i})
+        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
 
 i = repVoteShare
 counter = 0
 
 while i >= 0:
-    repSeats = 0
-    for district in votingByDistrict:
-        percentRepUpdated = district["percentRep"] - counter * SWING_CONST
-        if percentRepUpdated > 0.50:
-            repSeats += 1
+    totalRepSeats = 0
+    for j in range(0,1000):
+        repSeats = 0
+        for district in votingByDistrict:
+            percentRepUpdated = district["percentRep"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
+            if percentRepUpdated > 0.50:
+                repSeats += 1
+        totalRepSeats += repSeats
 
-    i -= 0.01
+    i -= SWING_CONST
     counter += 1
 
     if i >= 0:
-        seatsVotesRep.append({"seats": float(repSeats) / len(votingByDistrict), "votes": i})
+        seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
 
 i = demVoteShare
 counter = 0
 
 while i >= 0:
-    demSeats = 0
-    for district in votingByDistrict:
-        percentDemUpdated = district["percentDem"] - counter * SWING_CONST
-        if percentDemUpdated > 0.50:
-            demSeats += 1
+    totalDemSeats = 0
 
-    i -= 0.01
+    for j in range(0,1000):
+        demSeats = 0
+        for district in votingByDistrict:
+            percentDemUpdated = district["percentDem"] - counter * SWING_CONST - SWING_CONST * random.randint(0, 5)
+            if percentDemUpdated > 0.50:
+                demSeats += 1
+        totalDemSeats += demSeats
+
+    i -= SWING_CONST
     counter += 1
 
     if i >= 0:
-        seatsVotesDem.append({"seats": float(demSeats) / len(votingByDistrict), "votes": i})
+        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
+
 
 seatsVotesRep = sorted(seatsVotesRep, key=lambda svpair: svpair["votes"])
 seatsVotesDem = sorted(seatsVotesDem, key=lambda svpair: svpair["votes"])

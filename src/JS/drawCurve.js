@@ -8,6 +8,9 @@ function drawCurve(id){
   var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
+  var e = document.getElementById("year-selecter");
+  var year = e.options[e.selectedIndex].value;
+
   d3.selectAll(".graph").classed("hidden", true);
 
   //Scale from 0 to 100%
@@ -21,7 +24,7 @@ function drawCurve(id){
   var dataset = d3.select("#" + id).node().dataset;
 
   d3.select("#" + id).select('svg').selectAll("*").remove(); //Clear all past graph drawings
-  var svg = d3.select("#" + id).classed("hidden", false).select("svg")
+  var svg = d3.select("#" + id).classed("hidden", false).classed("active", true).select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mouseover", function(d){
@@ -57,7 +60,7 @@ function drawCurve(id){
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ,-20)")
     .attr("class", "axis-label")
-    .text("Seats-Votes Curve for " + dataset.state + " in " + dataset.year);
+    .text("Seats-Votes Curve for " + dataset.state + " in " + year);
 
   //Add y axis w/ label
   svg.append("g")
@@ -71,7 +74,7 @@ function drawCurve(id){
     .attr("class", "axis-label")
     .text("Percentage of Seats");
 
-  d3.csv("../data/seats-votes/" + dataset.year + "/" + id + ".csv", function(error, data){
+  d3.csv("../data/seats-votes/" + year + "/" + id + ".csv", function(error, data){
     data.forEach(function(d){
       d.votesR = parseFloat(d.votesR);
       d.seatsR = parseFloat(d.seatsR);
@@ -100,5 +103,24 @@ function drawCurve(id){
       .style("stroke", blue)
       .attr("class", "line")
       .attr("d", democraticLine);
+
+    //Add gelman king 50-50 markers
+    svg.append("line")
+      .attr("x1", function(d){return x(0);})
+      .attr("y1", function(d){return y(50);})
+      .attr("x2", function(d){return x(100);})
+      .attr("y2", function(d){return y(50);})
+      .style("stroke", "black")
+      .style("stroke-width", "1")
+      .style("stroke-dasharray", "5,5");
+
+    svg.append("line")
+      .attr("x1", function(d){return x(50);})
+      .attr("y1", function(d){return y(0);})
+      .attr("x2", function(d){return x(50);})
+      .attr("y2", function(d){return y(100);})
+      .style("stroke", "black")
+      .style("stroke-width", "1")
+      .style("stroke-dasharray", "5,5");
   });
 }

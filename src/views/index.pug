@@ -15,6 +15,11 @@ html(lang='en')
 
       .section
         .sidebar 
+          p Select year: 
+          select#year-selecter(onchange = "redrawCurves()")
+            each year in ["2012", "2014", "2016"]
+              option(value = year)= year
+          br
           ul
             each state in states
               li

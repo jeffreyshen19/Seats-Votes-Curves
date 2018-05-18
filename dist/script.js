@@ -11,7 +11,7 @@ function drawCurve(id){
   var e = document.getElementById("year-selecter");
   var year = e.options[e.selectedIndex].value;
 
-  d3.selectAll(".graph").classed("hidden", true);
+  d3.selectAll(".graph").classed("hidden", true).classed("active", false);
 
   //Scale from 0 to 100%
   var x = d3.scaleLinear().range([0, width]).domain([0, 100]);
@@ -115,15 +115,23 @@ function drawCurve(id){
       .style("stroke-dasharray", "5,5");
 
     svg.append("line")
-      .attr("x1", function(d){return x(50);})
-      .attr("y1", function(d){return y(0);})
-      .attr("x2", function(d){return x(50);})
-      .attr("y2", function(d){return y(100);})
+      .attr("x1", x(50))
+      .attr("y1", y(0))
+      .attr("x2", x(50))
+      .attr("y2", y(100))
       .style("stroke", "black")
       .style("stroke-width", "1")
       .style("stroke-dasharray", "5,5");
+
+    //Add idealized EG band
+    svg.append("polyline")
+      .attr("points", x(17) + "," + y(0) + " " + x(33) + "," + y(0) + " " + x(83) + "," + y(100) + " " + x(67) + "," + y(100))
+      .style("fill", "black")
+      .style("fill-opacity", "0.3");
   });
 }
+
+drawCurve("AL");
 
 function redrawCurves(){
   drawCurve(d3.select(".active").attr('id'));

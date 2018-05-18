@@ -36,7 +36,7 @@ h3{
   font-size: 1.25em;
 }
 
-p{
+p, a{
   font-family: "libre_baskerville";
 }
 
@@ -46,4 +46,20 @@ i{
 
 strong{
   font-weight: bold;
+}
+
+li{
+  list-style-type: disc;
+}
+
+a{
+  cursor: pointer;
+  transition: 0.2s all;
+  &:hover{
+    font-weight: bold;
+  }
+}
+
+.hidden{
+  display: none;
 }

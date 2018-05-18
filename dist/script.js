@@ -1,12 +1,15 @@
-var margin = {top: 40, right: 20, bottom: 60, left: 60},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 40, right: 20, bottom: 60, left: 60};
 
 var red = "#D64541",
     blue = "#446CB3";
 
 function drawCurve(id){
-  console.log(id);
+  //Set width and height
+  var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+  d3.selectAll(".graph").classed("hidden", true);
+
   //Scale from 0 to 100%
   var x = d3.scaleLinear().range([0, width]).domain([0, 100]);
   var y = d3.scaleLinear().range([height, 0]).domain([0, 100]);
@@ -18,7 +21,7 @@ function drawCurve(id){
   var dataset = d3.select("#" + id).node().dataset;
 
   d3.select("#" + id).select('svg').selectAll("*").remove(); //Clear all past graph drawings
-  var svg = d3.select("#" + id).select("svg")
+  var svg = d3.select("#" + id).classed("hidden", false).select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mouseover", function(d){

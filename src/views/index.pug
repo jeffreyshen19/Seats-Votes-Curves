@@ -20,6 +20,11 @@ html(lang='en')
             each year in ["2012", "2014", "2016"]
               option(value = year)= year
           br
+          br
+          p Toggle Efficiency Gap Band: 
+          input#toggle-eg-band(type = "checkbox" onchange = "redrawCurves()")
+          br
+          br
           ul
             each state in states
               li

@@ -11,6 +11,8 @@ function drawCurve(id){
   var e = document.getElementById("year-selecter");
   var year = e.options[e.selectedIndex].value;
 
+  var checked = document.getElementById("toggle-eg-band").checked;
+
   d3.selectAll(".graph").classed("hidden", true).classed("active", false);
 
   //Scale from 0 to 100%
@@ -124,9 +126,11 @@ function drawCurve(id){
       .style("stroke-dasharray", "5,5");
 
     //Add idealized EG band
-    svg.append("polyline")
-      .attr("points", x(17) + "," + y(0) + " " + x(33) + "," + y(0) + " " + x(83) + "," + y(100) + " " + x(67) + "," + y(100))
-      .style("fill", "black")
-      .style("fill-opacity", "0.3");
+    if(checked){
+      svg.append("polyline")
+        .attr("points", x(17) + "," + y(0) + " " + x(33) + "," + y(0) + " " + x(83) + "," + y(100) + " " + x(67) + "," + y(100))
+        .style("fill", "black")
+        .style("fill-opacity", "0.3");
+    }
   });
 }

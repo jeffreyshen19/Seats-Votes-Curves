@@ -13,6 +13,15 @@ html(lang='en')
     #wrapper 
       -var states = [{"name": "Alabama", "abbrev": "AL"},{"name": "Alaska", "abbrev": "AK"},{"name": "Arizona", "abbrev": "AZ"},{"name": "Arkansas", "abbrev": "AR"},{"name": "California", "abbrev": "CA"},{"name": "Colorado", "abbrev": "CO"},{"name": "Connecticut", "abbrev": "CT"},{"name": "Delaware", "abbrev": "DE"},{"name": "Florida", "abbrev": "FL"},{"name": "Georgia", "abbrev": "GA"},{"name": "Hawaii", "abbrev": "HI"},{"name": "Idaho", "abbrev": "ID"},{"name": "Illinois", "abbrev": "IL"},{"name": "Indiana", "abbrev": "IN"},{"name": "Iowa", "abbrev": "IA"},{"name": "Kansas", "abbrev": "KS"},{"name": "Kentucky", "abbrev": "KY"},{"name": "Louisiana", "abbrev": "LA"},{"name": "Maine", "abbrev": "ME"},{"name": "Maryland", "abbrev": "MD"},{"name": "Massachusetts", "abbrev": "MA"},{"name": "Michigan", "abbrev": "MI"},{"name": "Minnesota", "abbrev": "MN"},{"name": "Mississippi", "abbrev": "MS"},{"name": "Missouri", "abbrev": "MO"},{"name": "Montana", "abbrev": "MT"},{"name": "Nebraska", "abbrev": "NE"},{"name": "Nevada", "abbrev": "NV"},{"name": "New Hampshire", "abbrev": "NH"},{"name": "New Jersey", "abbrev": "NJ"},{"name": "New Mexico", "abbrev": "NM"},{"name": "New York", "abbrev": "NY"},{"name": "North Carolina", "abbrev": "NC"},{"name": "North Dakota", "abbrev": "ND"},{"name": "Ohio", "abbrev": "OH"},{"name": "Oklahoma", "abbrev": "OK"},{"name": "Oregon", "abbrev": "OR"},{"name": "Pennsylvania", "abbrev": "PA"},{"name": "Rhode Island", "abbrev": "RI"},{"name": "South Carolina", "abbrev": "SC"},{"name": "South Dakota", "abbrev": "SD"},{"name": "Tennessee", "abbrev": "TN"},{"name": "Texas", "abbrev": "TX"},{"name": "Utah", "abbrev": "UT"},{"name": "Vermont", "abbrev": "VT"},{"name": "Virginia", "abbrev": "VA"},{"name": "Washington", "abbrev": "WA"},{"name": "West Virginia", "abbrev": "WV"},{"name": "Wisconsin", "abbrev": "WI"},{"name": "Wyoming", "abbrev": "WY"}]
 
+      header
+        .overlay
+        center 
+          h1 Exploring the Seats-Votes Curve
+          p A historical examination of seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.
+          br
+          h4 By <a href = "http://jeffreyshen.com">Jeffrey Shen</a>
+      i Image source: https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg
+
       .section
         .sidebar 
           p Select year: 
@@ -25,11 +34,11 @@ html(lang='en')
           input#toggle-eg-band(type = "checkbox" onchange = "redrawCurves()")
           br
           br
-          ul
-            each state in states
-              li
-                a(onclick = "drawCurve('" + state.abbrev + "')")= state.name
-                
+          p Select state: 
+          select#select-state(onchange = "var selectBox = document.getElementById('select-state');console.log(selectBox);drawCurve(selectBox.options[selectBox.selectedIndex].value)")
+            each state in states 
+              option(value = state.abbrev)= state.name
+
         .body
           each state in states
             div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")

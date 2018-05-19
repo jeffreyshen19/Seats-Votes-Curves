@@ -1,29 +1,3 @@
 @import "reset";
 @import "theme";
 @import "structure";
-
-#wrapper{
-  padding: 20px;
-}
-
-.axis-label{
-  font-family: "gotham_bold";
-  text-anchor: middle;
-}
-
-.line{
-  stroke-width: 3px;
-  fill: none;
-}
-
-.hidden{
-  display: none;
-}
-
-.graph{
-  position: relative;
-  .tooltip{
-    position: absolute;
-    white-space: nowrap;
-  }
-}

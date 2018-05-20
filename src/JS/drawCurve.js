@@ -78,19 +78,18 @@ function drawCurve(id){
 
   d3.csv("../data/seats-votes/" + year + "/" + id + ".csv", function(error, data){
     data.forEach(function(d){
-      d.votesR = parseFloat(d.votesR);
+      d.votes = parseFloat(d.votes);
       d.seatsR = parseFloat(d.seatsR);
-      d.votesD = parseFloat(d.votesD);
       d.seatsD = parseFloat(d.seatsD);
     });
 
     //Set up lines
     var republicanLine = d3.line()
-      .x(function(d) { return x(d.votesR); })
+      .x(function(d) { return x(d.votes); })
       .y(function(d) { return y(d.seatsR); });
 
     var democraticLine = d3.line()
-      .x(function(d) { return x(d.votesD); })
+      .x(function(d) { return x(d.votes); })
       .y(function(d) { return y(d.seatsD); });
 
     //Add both lines

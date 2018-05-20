@@ -26,6 +26,7 @@ h1,h2,h3,h4,h5,h6{
 
 h1{
   font-size: 2em;
+  margin-bottom: 8px;
 }
 
 h2{
@@ -48,8 +49,15 @@ strong{
   font-weight: bold;
 }
 
-li{
+ul li{
   list-style-type: disc;
+}
+
+ol {
+  padding-left: 20px;
+  li{
+    list-style-type: decimal;
+  }
 }
 
 a{

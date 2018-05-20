@@ -1,3 +1,7 @@
+.attr{
+  padding: 20px;
+}
+
 #wrapper{
   padding: 0px;
 
@@ -39,26 +43,38 @@
   }
 
   .section{
+    padding: 40px;
     width: 100%;
     position: relative;
+    box-sizing: border-box;
 
     .sidebar{
       vertical-align: text-top;
       height: 100%;
       width: 20%;
       position: absolute;
-      top: 0;
       left: 0;
-      padding: 30px 0px 30px 30px;
+      padding: 0 20px 0 40px;
       a{
         line-height: 1.2em;
       }
     }
 
     .body{
-      width: calc(80% - 50px);
+      width: 80%;
       margin-left: 20%;
-      padding: 30px 50px 30px 0;
+      padding: 0;
+    }
+
+    &:nth-of-type(even){
+      background: #EEEEEE;
+    }
+  }
+
+  #table-of-contents{
+    .center-left{
+      width: 40%;
+      margin: 0 auto;
     }
   }
 }

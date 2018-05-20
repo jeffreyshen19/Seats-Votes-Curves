@@ -32,27 +32,23 @@ for state in states:
     demLowerLimit = 0
     repUpperLimit = 0
     demUpperLimit = 0
-    repStarting = 0
-    demStarting = 0
+    starting = 0
 
     for lineStr in csv:
 
         if len(lineStr) > 0:
             line = lineStr.split(",")
-            if line[0] != "votesR":
+            if line[0] != "votes":
 
                 if float(line[0]) <= 50:
                     repLowerLimit = float(line[1])
-                    repStarting = float(line[0])
-                if float(line[0]) >= 50 and repUpperLimit == 0:
+                    starting = float(line[0])
+                    demLowerLimit = float(line[2])
+                if float(line[0]) >= 50 and repUpperLimit == 0 and demUpperLimit == 0:
                     repUpperLimit = float(line[1])
-                if float(line[2]) <= 50:
-                    demLowerLimit = float(line[3])
-                    demStarting = float(line[2])
-                if float(line[2]) >= 50 and demUpperLimit == 0:
-                    demUpperLimit = float(line[3])
+                    demUpperLimit = float(line[2])
 
-    partisan_bias = ((repUpperLimit - repLowerLimit) * (50 - repStarting) + repLowerLimit) - ((demUpperLimit - demLowerLimit) * (50 - demStarting) + demLowerLimit)
+    partisan_bias = ((repUpperLimit - repLowerLimit) * (50 - starting) + repLowerLimit) - ((demUpperLimit - demLowerLimit) * (50 - starting) + demLowerLimit)
 
     outputFile.write(state + "," + str(partisan_bias) + "\n")
 

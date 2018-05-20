@@ -20,29 +20,56 @@ html(lang='en')
           p A historical examination of seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.
           br
           h4 By <a href = "http://jeffreyshen.com">Jeffrey Shen</a>
-      i Image source: https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg
+      #body
+        br
+        i.attr Image source: https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg
 
-      .section
-        .sidebar 
-          p Select year: 
-          select#year-selecter(onchange = "redrawCurves()")
-            each year in ["2016","2014","2012"]
-              option(value = year)= year
-          br
-          br
-          p Toggle Efficiency Gap Band: 
-          input#toggle-eg-band(type = "checkbox" onchange = "redrawCurves()")
-          br
-          br
-          p Select state: 
-          select#select-state(onchange = "var selectBox = document.getElementById('select-state');console.log(selectBox);drawCurve(selectBox.options[selectBox.selectedIndex].value)")
-            each state in states 
-              option(value = state.abbrev)= state.name
+        #table-of-contents.section
+          .center-left
+            h1 Table of Contents
+            ol 
+              li 
+                a(href = "#what") What is the Seats-Votes Curve? 
+              li 
+                a(href = "#methodology") Methodology
+              li
+                a(href = "#explore") Explore Seats-Votes Curves from 1980 - 2016
+              li 
+                a(href = "#historical-trends") Historical Trends in the Seats-Votes Curves 
+              li 
+                a Results 
+              li 
+                a Conclusion and Data
+        .section#what
+          h1 What is the Seats-Votes Curve? 
+          p ADD TEXT HERE
+        .section#methodology
+          h1 Methodology
+          p ADD TEXT HERE
+        .section#explore
+          h1 Explore Seats-Votes Curves from 1980-2016 
+          .sidebar 
+            p Select year: 
+            select#year-selecter(onchange = "redrawCurves()")
+              each year in ["2016","2014","2012"]
+                option(value = year)= year  
+            br
+            br
+            p Select state: 
+            select#select-state(onchange = "var selectBox = document.getElementById('select-state');console.log(selectBox);drawCurve(selectBox.options[selectBox.selectedIndex].value)")
+              each state in states 
+                option(value = state.abbrev)= state.name
+            br
+            br
+            p Toggle Efficiency Gap Band: 
+            input#toggle-eg-band(type = "checkbox" onchange = "redrawCurves()")
 
-        .body
-          each state in states
-            div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")
-              svg    
+          .body
+            each state in states
+              div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")
+                svg   
+        .section#historical-trends 
+          h1 Historical Trends in the Seats-Votes Curves
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")
     script(src = "./dist/script-min.js")

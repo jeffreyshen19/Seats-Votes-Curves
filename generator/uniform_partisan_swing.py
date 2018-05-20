@@ -32,10 +32,12 @@ for lineStr in csv:
         totalRepVotes += rep
         percentRep = float(rep) / total
 
-        votingByDistrict.append({"rep": rep, "dem": dem, "percentRep": percentRep, "percentDem": 1.0 - percentRep})
+        votingByDistrict.append({"percentRep": percentRep, "percentDem": 1.0 - percentRep})
 
 repVoteShare = float(totalRepVotes) / totalVotes
 demVoteShare = float(totalDemVotes) / totalVotes
+
+diff = (((100 * repVoteShare) % 1) - ((100 * demVoteShare) % 1)) / 100 #
 
 # Generate curve
 i = repVoteShare
@@ -47,9 +49,11 @@ while i <= 1:
 
         for district in votingByDistrict:
             percentRepUpdated = district["percentRep"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
+            percentDemUpdated = 1 - percentRepUpdated + diff
+
             if percentRepUpdated > 0.50:
                 totalRepSeats += 1
-            else:
+            if percentDemUpdated > 0.50:
                 totalDemSeats += 1
 
     i += SWING_CONST
@@ -57,7 +61,7 @@ while i <= 1:
 
     if i <= 1:
         seatsVotesRep.append({"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
-        seatsVotesDem.insert(0, {"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": 1 - i})
+        seatsVotesDem.insert(0, {"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": 1 - i + diff})
 
 i = demVoteShare
 counter = 0
@@ -68,17 +72,18 @@ while i <= 1:
 
     for j in range(0,1000): #simulate 1000 elections
         for district in votingByDistrict:
-            percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
+            percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5) + diff
+            percentRepUpdated = 1 - (percentDemUpdated - diff)
             if percentDemUpdated > 0.50:
                 totalDemSeats += 1
-            else:
+            if percentRepUpdated > 0.50:
                 totalRepSeats += 1
 
     i += SWING_CONST
     counter += 1
 
     if i <= 1:
-        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i})
+        seatsVotesDem.append({"seats": float(totalDemSeats) / (len(votingByDistrict) * 1000.0), "votes": i + diff})
         seatsVotesRep.insert(0, {"seats": float(totalRepSeats) / (len(votingByDistrict) * 1000.0), "votes": 1 - i})
 
 # Add endpoints
@@ -87,9 +92,9 @@ seatsVotesDem.insert(0, {"seats": 0, "votes": 0})
 seatsVotesRep.append({"seats": 1, "votes": 1})
 seatsVotesDem.append({"seats": 1, "votes": 1})
 
-outputFile.write("votesR,seatsR,votesD,seatsD\n")
+outputFile.write("votes,seatsR,seatsD\n")
 for i in range(0, len(seatsVotesDem)):
-    outputFile.write(str(100 * seatsVotesRep[i]["votes"]) + "," + str(100 * seatsVotesRep[i]["seats"]) + "," + str(100 * seatsVotesDem[i]["votes"]) + "," + str(100 * seatsVotesDem[i]["seats"]) + "\n")
+    outputFile.write(str(100 * seatsVotesRep[i]["votes"]) + "," + str(100 * seatsVotesRep[i]["seats"]) + "," + str(100 * seatsVotesDem[i]["seats"]) + "\n")
 
 inputFile.close()
 outputFile.close()

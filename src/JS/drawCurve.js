@@ -3,6 +3,8 @@ var margin = {top: 40, right: 20, bottom: 60, left: 60};
 var red = "#D64541",
     blue = "#446CB3";
 
+var scoreData = {"2012": null, "2014": null, "2016": null};
+
 function drawCurve(id){
   //Set width and height
   var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
@@ -131,5 +133,34 @@ function drawCurve(id){
         .style("fill", "black")
         .style("fill-opacity", "0.3");
     }
+
+    //Load score data
+    if(scoreData["" + year] == null){
+      d3.csv("../data/seats-votes-scores/" + year + ".csv", function(error, data){
+        scoreData["" + year] = [];
+        data.forEach(function(d){
+          if(d.state == id){
+            svg.append("text")
+              .attr("x", 10)
+              .attr("y", 10)
+              .text("Partisan bias: " + parseFloat(d.gk_bias).toFixed(2) + "%");
+          }
+          scoreData["" + year].push({"state": d.state, "gk_bias": parseFloat(d.gk_bias).toFixed(2)});
+        });
+      });
+    }
+    else{
+      for(var i = 0; i < scoreData["" + year].length; i++){
+        d = scoreData["" + year][i];
+        if(d.state == id){
+          svg.append("text")
+            .attr("x", 10)
+            .attr("y", 10)
+            .text("Partisan bias: " + d.gk_bias + "%");
+          break;
+        }
+      }
+    }
+
   });
 }

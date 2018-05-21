@@ -12,6 +12,7 @@ html(lang='en')
   body
     #wrapper 
       -var states = [{"name": "Alabama", "abbrev": "AL"},{"name": "Alaska", "abbrev": "AK"},{"name": "Arizona", "abbrev": "AZ"},{"name": "Arkansas", "abbrev": "AR"},{"name": "California", "abbrev": "CA"},{"name": "Colorado", "abbrev": "CO"},{"name": "Connecticut", "abbrev": "CT"},{"name": "Delaware", "abbrev": "DE"},{"name": "Florida", "abbrev": "FL"},{"name": "Georgia", "abbrev": "GA"},{"name": "Hawaii", "abbrev": "HI"},{"name": "Idaho", "abbrev": "ID"},{"name": "Illinois", "abbrev": "IL"},{"name": "Indiana", "abbrev": "IN"},{"name": "Iowa", "abbrev": "IA"},{"name": "Kansas", "abbrev": "KS"},{"name": "Kentucky", "abbrev": "KY"},{"name": "Louisiana", "abbrev": "LA"},{"name": "Maine", "abbrev": "ME"},{"name": "Maryland", "abbrev": "MD"},{"name": "Massachusetts", "abbrev": "MA"},{"name": "Michigan", "abbrev": "MI"},{"name": "Minnesota", "abbrev": "MN"},{"name": "Mississippi", "abbrev": "MS"},{"name": "Missouri", "abbrev": "MO"},{"name": "Montana", "abbrev": "MT"},{"name": "Nebraska", "abbrev": "NE"},{"name": "Nevada", "abbrev": "NV"},{"name": "New Hampshire", "abbrev": "NH"},{"name": "New Jersey", "abbrev": "NJ"},{"name": "New Mexico", "abbrev": "NM"},{"name": "New York", "abbrev": "NY"},{"name": "North Carolina", "abbrev": "NC"},{"name": "North Dakota", "abbrev": "ND"},{"name": "Ohio", "abbrev": "OH"},{"name": "Oklahoma", "abbrev": "OK"},{"name": "Oregon", "abbrev": "OR"},{"name": "Pennsylvania", "abbrev": "PA"},{"name": "Rhode Island", "abbrev": "RI"},{"name": "South Carolina", "abbrev": "SC"},{"name": "South Dakota", "abbrev": "SD"},{"name": "Tennessee", "abbrev": "TN"},{"name": "Texas", "abbrev": "TX"},{"name": "Utah", "abbrev": "UT"},{"name": "Vermont", "abbrev": "VT"},{"name": "Virginia", "abbrev": "VA"},{"name": "Washington", "abbrev": "WA"},{"name": "West Virginia", "abbrev": "WV"},{"name": "Wisconsin", "abbrev": "WI"},{"name": "Wyoming", "abbrev": "WY"}]
+      -var years = ["2016","2014","2012","2010","2008","2006","2004","2002","2000"]
 
       header
         .overlay
@@ -39,7 +40,7 @@ html(lang='en')
               li 
                 a Results 
               li 
-                a Conclusion and Data
+                a Data and Sources
         .section#what
           h1 What is the Seats-Votes Curve? 
           p ADD TEXT HERE
@@ -51,12 +52,12 @@ html(lang='en')
           .sidebar 
             p Select year: 
             select#year-selecter(onchange = "redrawCurves()")
-              each year in ["2016","2014","2012","2010","2008","2006","2004","2002","2000"]
+              each year in years
                 option(value = year)= year  
             br
             br
             p Select state: 
-            select#select-state(onchange = "var selectBox = document.getElementById('select-state');console.log(selectBox);drawCurve(selectBox.options[selectBox.selectedIndex].value)")
+            select#select-state(onchange = "var selectBox = document.getElementById('select-state');drawCurve(selectBox.options[selectBox.selectedIndex].value)")
               each state in states 
                 option(value = state.abbrev)= state.name
             br
@@ -70,6 +71,17 @@ html(lang='en')
                 svg   
         .section#historical-trends 
           h1 Historical Trends in the Seats-Votes Curves
+          h3 Partisan bias over time: 
+          .sidebar 
+            br
+            p Select state: 
+            select#select-state-historical(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical');drawHistoricalCurve('historical-gk-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+              each state in states 
+                option(value = state.abbrev)= state.name
+          .body
+            each state in states
+              div.graph-historical.hidden(id = "historical-gk-" + state.abbrev data-state = state.name data-title = "Partisan Bias")
+                svg  
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")
     script(src = "./dist/script-min.js")

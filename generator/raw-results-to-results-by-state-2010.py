@@ -1,7 +1,7 @@
 import sys
 import csv
 
-# Converts the raw election results to results by state. Works for 2002-2010
+# Converts the raw election results to results by state. Works for 2000-2010
 # python generator/raw-results-to-results-by-state-2010.py data/raw-election-results/2010.csv data/results-by-state/2010
 
 outputFolder = sys.argv[2]

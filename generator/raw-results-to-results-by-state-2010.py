@@ -1,7 +1,7 @@
 import sys
 import csv
 
-# Converts the raw election results to results by state. Works for 2010
+# Converts the raw election results to results by state. Works for 2010 and 2008
 # python generator/raw-results-to-results-by-state-2010.py data/raw-election-results/2010.csv data/results-by-state/2010
 
 outputFolder = sys.argv[2]
@@ -46,9 +46,9 @@ with open(sys.argv[1], "rU") as csvfile:
                 districtNum += 1
                 states[stateNum]["districts"].append(str(rep) + "," + str(dem))
 
-            if party == "REP":
+            if (party == "REP" or party == "R") and votes.isdigit():
                 rep = votes
-            elif party == "DEM":
+            elif party == "DEM" or party == "D" and votes.isdigit():
                 dem = votes
 
 states[49]["districts"].append(str(rep) + "," + str(dem))

@@ -23,8 +23,8 @@ totalRepVotes = 0
 for lineStr in csv:
     if len(lineStr) > 0:
         line = lineStr.split(",")
-        rep = 0 if (line[0] == "Unopposed" or line[0] == "#") else int(line[0])
-        dem = 0 if (line[1] == "Unopposed" or line[1] == "#") else int(line[1])
+        rep = 0 if ("Unopposed" in line[1] or line[0] == "#") else int(line[0])
+        dem = 0 if ("Unopposed" in line[1] or line[1] == "#") else int(line[1])
         total = rep + dem
 
         totalVotes += total

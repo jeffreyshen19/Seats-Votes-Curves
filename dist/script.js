@@ -143,9 +143,20 @@ function drawCurve(id){
             svg.append("text")
               .attr("x", 10)
               .attr("y", 10)
-              .text("Partisan bias: " + parseFloat(d.gk_bias).toFixed(2) + "%");
+              .append("svg:tspan")
+              .attr("x", 10)
+              .attr("dy", 0)
+              .text("Partisan bias: " + parseFloat(d.gk_bias).toFixed(2) + "%")
+              .append("svg:tspan")
+              .attr("x", 10)
+              .attr("dy", 20)
+              .text("Symmetry: " + parseFloat(d.symmetry).toFixed(2) + "%")
+              .append("svg:tspan")
+              .attr("x", 10)
+              .attr("dy", 20)
+              .text("Responsiveness: " + "0" + "%");
           }
-          scoreData["" + year].push({"state": d.state, "gk_bias": parseFloat(d.gk_bias).toFixed(2)});
+          scoreData["" + year].push({"state": d.state, "gk_bias": parseFloat(d.gk_bias).toFixed(2), "symmetry": parseFloat(d.symmetry).toFixed(2)});
         });
       });
     }
@@ -156,7 +167,18 @@ function drawCurve(id){
           svg.append("text")
             .attr("x", 10)
             .attr("y", 10)
-            .text("Partisan bias: " + d.gk_bias + "%");
+            .append("svg:tspan")
+            .attr("x", 10)
+            .attr("dy", 0)
+            .text("Partisan bias: " + parseFloat(d.gk_bias).toFixed(2) + "%")
+            .append("svg:tspan")
+            .attr("x", 10)
+            .attr("dy", 20)
+            .text("Symmetry: " + parseFloat(d.symmetry).toFixed(2) + "%")
+            .append("svg:tspan")
+            .attr("x", 10)
+            .attr("dy", 20)
+            .text("Responsiveness: " + "0" + "%");
           break;
         }
       }

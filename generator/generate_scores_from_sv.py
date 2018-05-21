@@ -10,7 +10,7 @@ inputFolder = sys.argv[2]
 
 #python generator/generate_scores_from_sv.py data/seats-votes-scores/2016.csv data/seats-votes/2016
 
-outputFile.write("state,gk_bias\n")
+outputFile.write("state,gk_bias,symmetry\n")
 
 repLowerLimit = 0
 demLowerLimit = 0
@@ -34,6 +34,9 @@ for state in states:
     demUpperLimit = 0
     starting = 0
 
+    symmetry = 0
+    numNumbers = 0
+
     for lineStr in csv:
 
         if len(lineStr) > 0:
@@ -47,9 +50,14 @@ for state in states:
                 if float(line[0]) >= 50 and repUpperLimit == 0 and demUpperLimit == 0:
                     repUpperLimit = float(line[1])
                     demUpperLimit = float(line[2])
+                if float(line[0]) >= 45 and float(line[0]) <= 55:
+                    symmetry += float(line[1]) - float(line[2])
+                    numNumbers += 1
+
+    symmetry = symmetry / numNumbers
 
     partisan_bias = ((repUpperLimit - repLowerLimit) * (50 - starting) + repLowerLimit) - ((demUpperLimit - demLowerLimit) * (50 - starting) + demLowerLimit)
 
-    outputFile.write(state + "," + str(partisan_bias) + "\n")
+    outputFile.write(state + "," + str(partisan_bias) + "," + str(symmetry) + "\n")
 
 outputFile.close()

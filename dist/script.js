@@ -3,7 +3,7 @@ var margin = {top: 40, right: 20, bottom: 60, left: 60};
 var red = "#D64541",
     blue = "#446CB3";
 
-var scoreData = {"2012": null, "2014": null, "2016": null};
+var scoreData = {"2010": null, "2012": null, "2014": null, "2016": null};
 
 function drawCurve(id){
   //Set width and height

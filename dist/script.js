@@ -154,9 +154,9 @@ function drawCurve(id){
               .append("svg:tspan")
               .attr("x", 10)
               .attr("dy", 20)
-              .text("Responsiveness: " + "0" + "%");
+              .text("Responsiveness: " + parseFloat(d.responsiveness).toFixed(2) + "%");
           }
-          scoreData["" + year].push({"state": d.state, "gk_bias": parseFloat(d.gk_bias).toFixed(2), "symmetry": parseFloat(d.symmetry).toFixed(2)});
+          scoreData["" + year].push({"state": d.state, "gk_bias": parseFloat(d.gk_bias).toFixed(2), "symmetry": parseFloat(d.symmetry).toFixed(2), "responsiveness": parseFloat(d.responsiveness).toFixed(2)});
         });
       });
     }
@@ -170,15 +170,15 @@ function drawCurve(id){
             .append("svg:tspan")
             .attr("x", 10)
             .attr("dy", 0)
-            .text("Partisan bias: " + parseFloat(d.gk_bias).toFixed(2) + "%")
+            .text("Partisan bias: " + d.gk_bias + "%")
             .append("svg:tspan")
             .attr("x", 10)
             .attr("dy", 20)
-            .text("Symmetry: " + parseFloat(d.symmetry).toFixed(2) + "%")
+            .text("Symmetry: " + d.symmetry + "%")
             .append("svg:tspan")
             .attr("x", 10)
             .attr("dy", 20)
-            .text("Responsiveness: " + "0" + "%");
+            .text("Responsiveness: " + d.responsiveness + "%");
           break;
         }
       }

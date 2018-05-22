@@ -7,33 +7,33 @@
 
   header{
     height: 70vh;
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../../assets/capitol.jpg");
+    overflow: hidden;
     position: relative;
 
     .overlay{
-      width: 100%;
-      height: 100%;
-      background: #34495e;
-      opacity: 0.4;
+      width: calc(100% + 16px);
+      height: calc(100% + 8px);
       z-index: 49;
       top: 0;
       left: 0;
       position: absolute;
+      filter: blur(4px) brightness(0.9) contrast(0.8);
+      background-position: center top;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url("../../assets/capitol.jpg");
+      margin: -4px -8px -8px -4px;
     }
 
     center{
       top: 50%;
       transform: translateY(-50%);
       position: relative;
-      color: #ecf0f1;
-      //text-shadow: -1px 0 #34495e, 0 1px #34495e, 1px 0 #34495e, 0 -1px #34495e;
+      color: #ececec;
       z-index: 50;
       padding: 0 10px;
       a{
-        color: #ecf0f1;
+        color: #ececec;
       }
 
       h1{

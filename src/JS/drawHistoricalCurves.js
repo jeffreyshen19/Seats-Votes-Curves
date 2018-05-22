@@ -8,11 +8,11 @@ function drawHistoricalCurve(id){
   var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
-  d3.selectAll(".graph-historical").classed("hidden", true).classed("active", false);
+  d3.selectAll(".graph-historical-" + title).classed("hidden", true).classed("active", false);
 
   //Scale from 0 to 100%
   var x = d3.scalePoint().range([0, width]);
-  var y = d3.scaleLinear().range([height, 0]).domain([0, 100]);
+  var y = d3.scaleLinear().range([height, 0]).domain([-100, 100]);
 
   //Make graph
   var tooltip = d3.select("#" + id).select(".tooltip");
@@ -88,5 +88,15 @@ function drawHistoricalCurve(id){
       .style("stroke", "#2c3e50")
       .attr("class", "line")
       .attr("d", line);
+
+    //Add line at 0
+    svg.append("line")
+      .attr("x1", function(d){return x("2000");})
+      .attr("y1", function(d){return y(0);})
+      .attr("x2", function(d){return x("2016");})
+      .attr("y2", function(d){return y(0);})
+      .style("stroke", "black")
+      .style("stroke-width", "1")
+      .style("stroke-dasharray", "5,5");
   });
 }

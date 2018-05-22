@@ -75,12 +75,38 @@ html(lang='en')
           .sidebar 
             br
             p Select state: 
-            select#select-state-historical(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical');drawHistoricalCurve('historical-gk-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+            select#select-state-historical(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical');drawHistoricalCurve('historical-gk-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value, 'gk')")
               each state in states 
                 option(value = state.abbrev)= state.name
           .body
             each state in states
-              div.graph-historical.hidden(id = "historical-gk-" + state.abbrev data-state = state.name data-title = "Partisan Bias")
+              div.graph-historical-gk.hidden(id = "historical-gk-" + state.abbrev data-state = state.name data-title = "Partisan Bias")
+                svg  
+          hr
+          br
+          h3 Partisan symmetry over time: 
+          .sidebar 
+            br
+            p Select state: 
+            select#select-state-historical-symmetry(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical-symmetry');drawHistoricalCurve('historical-symmetry-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+              each state in states 
+                option(value = state.abbrev)= state.name
+          .body
+            each state in states
+              div.graph-historical-symmetry.hidden(id = "historical-symmetry-" + state.abbrev data-state = state.name data-title = "Partisan symmetry")
+                svg  
+          hr
+          br
+          h3 Partisan responsiveness over time: 
+          .sidebar 
+            br
+            p Select state: 
+            select#select-state-historical-responsiveness(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical-responsiveness');drawHistoricalCurve('historical-responsiveness-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+              each state in states 
+                option(value = state.abbrev)= state.name
+          .body
+            each state in states
+              div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-" + state.abbrev data-state = state.name data-title = "Partisan responsiveness")
                 svg  
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")

@@ -18,7 +18,7 @@ html(lang='en')
         .overlay
         center 
           h1 Exploring the Seats-Votes Curve
-          p A historical examination of seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.
+          p A historical primer on seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.
           br
           h4 By Jeffrey Shen
       #body
@@ -43,10 +43,40 @@ html(lang='en')
                 a Data and Sources
         .section#what
           h1 What is the Seats-Votes Curve? 
-          p ADD TEXT HERE
+          p The seats-votes curve is a computer generated graph that plots the portion of seats a party will win for a certain vote share. The shape of the seats-votes curve provides information on the partisan characteristics of a particular state, such as how election outcomes are effected by changes in voting and whether elections are fair to both parties. In particular, there are three main statistics that can be derived from it: 
+          br
+          ol 
+            li <i>Partisan Bias</i> (a.k.a, Gelman-King Bias): The difference between a party’s seat share at 50% of the vote and 50%. For example, if Republicans won 60% of the seats at 50% of the vote, the partisan bias would be 10%. The partisan bias calculated from the Republican curve should be the same as that calculated from the Democrat curve. Partisan bias is indicative of how much a districting plan favors one particular party, with 0% being the least biased, and 50% being the most biased. Intuitively, it makes sense that both parties should win 50% of the seats at 50% of the vote; After all, this is both proportional and symmetric. 
+              br
+              br
+              | However, partisan bias only captures the characteristics of a seats-votes curve at the 50% vote share. Furthermore, since seats-votes curves are generated using computer algorithms—not real elections results—partisan bias is less accurate for non-competitive elections, where the vote share is far from 50%.  
+            br
+            li <i>Partisan Symmetry</i>: The average distance between the seats-votes curve of one party and that of the other party, over a range of vote shares (most commonly between 45% and 55% of the vote). It is widely agreed upon that both parties should receive the same percentage of seats at the same vote share in a "fair" districting plan. In other words, in a fair plan, Republicans can get 50% of the seats at 40% of the vote so long as Democrats also get 50% of the seats at 40% of the votes. Partisan symmetry measures how similar the seats-votes curve for Republicans is to the seats-votes curve for Democrats, thereby measuring the aforementioned standard. An ideal score would be 0%, meaning that the seats-votes curve for Republicans and Democrats are identical (symmetric) and the worse score is 50%.
+            br 
+            li <i>Responsiveness</i>: The average slope of the seats-votes curve, over a range of vote shares (most commonly between 45% and 55% of the vote). Unlike the previous two measures, there is no ideal responsiveness score; Rather, responsiveness describes how votes translate into seats in a state. A low responsiveness score (less than 1) would indicate an <i>incumbent protection gerrymander</i>, meaning that seat shares are unresponsive to changes in voting, and therefore the districting plan helps preserve the seats of incumbents, whether they be Democrat or Republican. A responsiveness score of approximately 1 would indicate a proportional districting plan, meaning a 1% vote increase translates into a 1% seat increase. A high responsiveness score (greater than 1) would indicate a heavy "winner-take-all" characteristic, meaning the majority party tends to win more seats than votes. Winner-take-all plans are characteristic of most American elections.
+              br
+              br
+              | It's important to recognize that responsiveness does not favor one particular party; Low responsiveness protects incumbents of both parties (although there still may be a partisan bias, for example) and high responsiveness will always benefit the majority party. In this regard, responsiveness can be tweaked to benefit specific parties—say, a majority party wants to increase responsiveness to secure more seats—but there is no set standard for responsiveness.
         .section#methodology
           h1 Methodology
-          p ADD TEXT HERE
+          h3 How I generate the seats-votes curve
+          p The seats-votes curve is generated using mostly hypothetical, computer generated election results:
+          br
+          ol
+            li Start with the actual voting result for the state. Say, Democrats won 50% of the vote but 60% of the seats in the states overall. Then, we could plot the point (50, 60) on the Democrat curve, and (50, 40) on the Republican curve. 
+            br
+            li Add endpoints. For every state, 0% of the vote for one party will always result in 0% of the seats, and 100% of the vote for one party will always result in 100% of the seats. Therefore, the points (0,0) and (100,100) can be added to both the Democrat and Republican curve.  
+            br
+            li Fill in the rest of the curve using an assumption known as <i>uniform partisan swing</i>, which assumes that each district is representative of the state as a whole (Clearly, this assumption is flawed, as districts are often not microcosms of states, but it is convenient for the purposes of generating a hypothetical seats-votes curve. The nature of this assumption means that seats-votes curves generally lose validity towards the extremes). Essentially, starting from the initial election results, add 1% of the vote share to one party, and decrease 1% of the vote share for the other party in each district. The change in vote share will eventually result in a change of seat shares state-wide, and the seat-votes curve will gradually be filled in from (0,0) to (100, 100) for both parties. 
+            br
+            li The resulting seats-votes curve will be a step function, as under the uniform partisan swing model, votes don't smoothly translate into seats; There will be plateaus, followed by a vertical jump / fall when a district changes party hands. In order to smooth the curve out, apply a 5% (as per the findings of <i>Gerrymandering in America</i>) variation to the voting results in each district. So, instead of adding 1% to each district, add 1% plus a random number between -5% and 5%. This variation should be simulated 1000 times for each vote level and averaged out, resulting in a smoother curve.
+          br
+          p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
+          br
+          h3 How I calculate partisan bias
+          h3 How I calculate partisan symmetry
+          h3 How I calculate responsiveness
+          p Source code for the algorithm to generate partisan bias, symmetry, and responsiveness is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/generate_scores_from_sv.py">here</a>.
         .section#explore
           h1 Explore Seats-Votes Curves from 1980-2016 
           .sidebar 

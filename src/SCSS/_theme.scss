@@ -20,6 +20,8 @@
   src: url("../../assets/fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf");
 }
 
+$black: #34495e;
+
 h1,h2,h3,h4,h5,h6{
   font-family: "gotham_bold";
 }
@@ -67,6 +69,29 @@ a{
   &:hover{
     font-weight: bold;
   }
+}
+
+table, th, td {
+  border: 2px solid $black;
+}
+
+th, td{
+  padding: 5px;
+  width: 33.3%;
+}
+
+th{
+  font-weight: bold;
+}
+
+table{
+  display: inline-block;
+  margin-right: 10px;
+  width: calc(50% - 15px);
+}
+
+.graph-demonstration{
+  display: inline-block;
 }
 
 .hidden{

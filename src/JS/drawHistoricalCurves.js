@@ -8,7 +8,7 @@ function drawHistoricalCurve(id){
   var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
-  d3.selectAll(".graph-historical-" + title).classed("hidden", true).classed("active", false);
+  d3.selectAll(".graph-historical-" + title).classed("hidden", true).classed("active-historical", false);
 
   //Scale from 0 to 100%
   var x = d3.scalePoint().range([0, width]);
@@ -21,7 +21,7 @@ function drawHistoricalCurve(id){
   var dataset = d3.select("#" + id).node().dataset;
 
   d3.select("#" + id).select('svg').selectAll("*").remove(); //Clear all past graph drawings
-  var svg = d3.select("#" + id).classed("hidden", false).classed("active", true).select("svg")
+  var svg = d3.select("#" + id).classed("hidden", false).classed("active-historical", true).select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mouseover", function(d){

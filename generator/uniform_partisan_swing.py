@@ -48,7 +48,7 @@ while i <= 1:
     for j in range(0,1000): #simulate 1000 elections
 
         for district in votingByDistrict:
-            percentRepUpdated = district["percentRep"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5)
+            percentRepUpdated = district["percentRep"] + counter * SWING_CONST + SWING_CONST * random.randint(-5, 5)
             percentDemUpdated = 1 - percentRepUpdated + diff
 
             if percentRepUpdated > 0.50:
@@ -72,7 +72,7 @@ while i <= 1:
 
     for j in range(0,1000): #simulate 1000 elections
         for district in votingByDistrict:
-            percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(0, 5) + diff
+            percentDemUpdated = district["percentDem"] + counter * SWING_CONST + SWING_CONST * random.randint(-5, 5) + diff
             percentRepUpdated = 1 - (percentDemUpdated - diff)
             if percentDemUpdated > 0.50:
                 totalDemSeats += 1

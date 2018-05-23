@@ -51,30 +51,30 @@ html(lang='en')
               br
               | However, partisan bias only captures the characteristics of a seats-votes curve at the 50% vote share. Furthermore, since seats-votes curves are generated using computer algorithms—not real elections results—partisan bias is less accurate for non-competitive elections, where the vote share is far from 50%.  
             br
-            div.graph-demonstration.hidden(id = "partisan-not-bias" data-height = "300" data-half = "true" data-caption = "A Seats-Votes Curve with Minimal Partisan Bias")
+            div.graph-demonstration.hidden(id = "partisan-not-bias" data-height = "400" data-half = "true" data-caption = "A Seats-Votes Curve with Minimal Partisan Bias")
               svg
-            div.graph-demonstration.hidden(id = "partisan-bias" data-height = "300" data-half = "true" data-caption = "A Seats-Votes Curve with Significant Partisan Bias")
+            div.graph-demonstration.hidden(id = "partisan-bias" data-height = "400" data-half = "true" data-caption = "A Seats-Votes Curve with Significant Partisan Bias")
               svg
             br
             li <i>Partisan Symmetry</i>: The average distance between the seats-votes curve of one party and that of the other party, over a range of vote shares (most commonly between 45% and 55% of the vote). It is widely agreed upon that both parties should receive the same percentage of seats at the same vote share in a "fair" districting plan. In other words, in a fair plan, Republicans can get 50% of the seats at 40% of the vote so long as Democrats also get 50% of the seats at 40% of the votes. Partisan symmetry measures how similar the seats-votes curve for Republicans is to the seats-votes curve for Democrats, thereby measuring the aforementioned standard. An ideal score would be 0%, meaning that the seats-votes curve for Republicans and Democrats are identical (symmetric) and the worse score is 50%.
             br
-            div.graph-demonstration.hidden(id = "symmetric" data-height = "300" data-half = "true" data-caption = "A Symmetric Seats-Votes Curve")
+            div.graph-demonstration.hidden(id = "symmetric" data-height = "400" data-half = "true" data-caption = "A Symmetric Seats-Votes Curve")
               svg
-            div.graph-demonstration.hidden(id = "not-symmetric" data-height = "300" data-half = "true" data-caption = "An Asymmetric Seats-Votes Curve")
+            div.graph-demonstration.hidden(id = "not-symmetric" data-height = "400" data-half = "true" data-caption = "An Asymmetric Seats-Votes Curve")
               svg
             br 
-            li <i>Responsiveness</i>: The average slope of the seats-votes curve, over a range of vote shares (most commonly between 45% and 55% of the vote). Unlike the previous two measures, there is no ideal responsiveness score; Rather, responsiveness describes how votes translate into seats in a state. A low responsiveness score (less than 1) would indicate an <i>incumbent protection gerrymander</i>, meaning that seat shares are unresponsive to changes in voting, and therefore the districting plan helps preserve the seats of incumbents, whether they be Democrat or Republican. A responsiveness score of approximately 1 would indicate a proportional districting plan, meaning a 1% vote increase translates into a 1% seat increase. A high responsiveness score (greater than 1) would indicate a heavy "winner-take-all" characteristic, meaning the majority party tends to win more seats than votes. Winner-take-all plans are characteristic of most American elections.
+            li <i>Responsiveness</i>: The average slope of the seats-votes curve, over a range of vote shares (most commonly between 45% and 55% of the vote). Unlike the previous two measures, there is no ideal responsiveness score; Rather, responsiveness describes how votes translate into seats in a state. A low responsiveness score (less than 1) would indicate an <i>incumbent protection gerrymander</i>, meaning that seat shares are unresponsive to changes in voting, and therefore the districting plan helps preserve the seats of incumbents, whether they be Democrat or Republican. A responsiveness score of approximately 1 would indicate a proportional districting plan, meaning a 1% vote increase translates into a 1% seat increase. A high responsiveness score (greater than 1) would indicate a heavy "winner-take-all" characteristic, meaning the majority party tends to win more seats than votes. Winner-take-all plans are characteristic of most American elections. Lastly, a responsiveness score around 2 would indicate a high level of compliance with the "Efficiency Gap" (EG), a recently developed measure of partisan gerrymandering that you can read about <a href = "https://www.brennancenter.org/sites/default/files/legal-work/How_the_Efficiency_Gap_Standard_Works.pdf" target = "_blank">here</a>.            
               br
               br
               | It's important to recognize that responsiveness does not favor one particular party; Low responsiveness protects incumbents of both parties (although there still may be a partisan bias, for example) and high responsiveness will always benefit the majority party. In this regard, responsiveness can be tweaked to benefit specific parties—say, a majority party wants to increase responsiveness to secure more seats—but there is no set standard for responsiveness.
             br
-            div.graph-demonstration.hidden(id = "proportional" data-height = "300" data-half = "true" data-caption = "A Proportional Plan")
+            div.graph-demonstration.hidden(id = "proportional" data-height = "400" data-half = "true" data-caption = "A Proportional Plan")
               svg
-            div.graph-demonstration.hidden(id = "incumbent-protection" data-height = "300" data-half = "true" data-caption = "An Incumbent Protection Gerrymander")
+            div.graph-demonstration.hidden(id = "incumbent-protection" data-height = "400" data-half = "true" data-caption = "An Incumbent Protection Gerrymander")
               svg
-            div.graph-demonstration.hidden(id = "winner-take-all" data-height = "300" data-half = "true" data-caption = "A Winner Take All Plan")
+            div.graph-demonstration.hidden(id = "winner-take-all" data-height = "400" data-half = "true" data-caption = "A Winner Take All Plan")
               svg
-            div.graph-demonstration.hidden(id = "eg-optimized" data-height = "300" data-half = "true" data-caption = "An EG Optimized Plan")
+            div.graph-demonstration.hidden(id = "eg-optimized" data-height = "400" data-half = "true" data-caption = "An EG Optimized Plan")
               svg
         .section#methodology
           h1 Methodology
@@ -130,11 +130,6 @@ html(lang='en')
               svg
           br
           p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
-          br
-          h3 How I calculate partisan bias
-          h3 How I calculate partisan symmetry
-          h3 How I calculate responsiveness
-          p Source code for the algorithm to generate partisan bias, symmetry, and responsiveness is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/generate_scores_from_sv.py">here</a>.
         .section#explore
           h1 Explore Seats-Votes Curves from 1980-2016 
           .sidebar 
@@ -152,7 +147,8 @@ html(lang='en')
             br
             p Toggle Efficiency Gap Band: 
             input#toggle-eg-band(type = "checkbox" onchange = "redrawCurves()")
-
+            p
+              i An ideal seats-votes curve, according to the efficiency gap, would fall within this band.
           .body
             each state in states
               div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")

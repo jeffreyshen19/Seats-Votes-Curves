@@ -14,7 +14,7 @@ function drawDemonstrationCurve(id){
   }
   else{
     width = d3.select(".section").node().offsetWidth - 100 - margin.left - margin.right;
-    height = 300 - margin.top - margin.bottom;
+    height = 400 - margin.top - margin.bottom;
   }
 
   if(dataset.height) height = parseInt(dataset.height) - margin.top - margin.bottom;

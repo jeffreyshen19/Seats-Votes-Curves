@@ -4,21 +4,23 @@ function drawHistoricalCurve(id){
   var title = id.split("-")[1];
   var state = id.split("-")[2];
 
+  //Make graph
+  var thisElement = d3.select("#" + id);
+  var tooltip = thisElement.select(".tooltip");
+
+  var dataset = thisElement.node().dataset;
+
   //Set width and height
   var width = d3.select(".body").node().offsetWidth - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
   d3.selectAll(".graph-historical-" + title).classed("hidden", true).classed("active-historical", false);
 
+  var domain = dataset.responsiveness ? [0, 10] : [-50, 50];
+
   //Scale from 0 to 100%
   var x = d3.scalePoint().range([0, width]);
-  var y = d3.scaleLinear().range([height, 0]).domain([-50, 50]);
-
-  //Make graph
-  var thisElement = d3.select("#" + id);
-  var tooltip = thisElement.select(".tooltip");
-
-  var dataset = thisElement.node().dataset;
+  var y = d3.scaleLinear().range([height, 0]).domain(domain);
 
   thisElement.select('svg').selectAll("*").remove(); //Clear all past graph drawings
 
@@ -80,9 +82,9 @@ function drawHistoricalCurve(id){
     svg.append("line")
       .attr("class", "tooltip-line hidden")
       .attr("x1", x(0))
-      .attr("y1", y(-50))
+      .attr("y1", y(domain[0]))
       .attr("x2", x(0))
-      .attr("y2", y(50))
+      .attr("y2", y(domain[1]))
       .style("stroke", "black")
       .style("stroke-width", "1")
       .style("stroke-dasharray", "5,5");

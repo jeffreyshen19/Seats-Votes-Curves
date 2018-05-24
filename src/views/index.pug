@@ -177,12 +177,16 @@ html(lang='en')
             br
             p Select state: 
             select#select-state-historical(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical');drawHistoricalCurve('historical-gk-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value, 'gk')")
+              option(value = "us") United States
               each state in states 
                 if state.numDistricts > 2
                   option(value = state.abbrev)= state.name
             p 
               i Note: States with less than 3 districts have been excluded, as they lack a large enough sample size for an accurate curve.
           .body
+            div.graph-historical-gk.hidden(id = "historical-gk-us" data-state = "United States" data-title = "Partisan Bias")
+              .tooltip.hidden
+              svg  
             each state in states
               if state.numDistricts > 2
                 div.graph-historical-gk.hidden(id = "historical-gk-" + state.abbrev data-state = state.name data-title = "Partisan Bias")
@@ -195,12 +199,16 @@ html(lang='en')
             br
             p Select state: 
             select#select-state-historical-symmetry(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical-symmetry');drawHistoricalCurve('historical-symmetry-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+              option(value = "us") United States
               each state in states 
                 if state.numDistricts > 2
                   option(value = state.abbrev)= state.name
             p 
               i Note: States with less than 3 districts have been excluded, as they lack a large enough sample size for an accurate curve.
           .body
+            div.graph-historical-symmetry.hidden(id = "historical-symmetry-us" data-state = "United States" data-title = "Partisan symmetry")
+              .tooltip.hidden
+              svg  
             each state in states
               if state.numDistricts > 2
                 div.graph-historical-symmetry.hidden(id = "historical-symmetry-" + state.abbrev data-state = state.name data-title = "Partisan symmetry")
@@ -213,15 +221,19 @@ html(lang='en')
             br
             p Select state: 
             select#select-state-historical-responsiveness(onchange = "var selectBoxHistorical = document.getElementById('select-state-historical-responsiveness');drawHistoricalCurve('historical-responsiveness-' + selectBoxHistorical.options[selectBoxHistorical.selectedIndex].value)")
+              option(value = "us") United States
               each state in states 
                 if state.numDistricts > 2
                   option(value = state.abbrev)= state.name
             p 
               i Note: States with less than 3 districts have been excluded, as they lack a large enough sample size for an accurate curve.
           .body
+            div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-us" data-state = "United States" data-title = "Partisan responsiveness" data-responsiveness = "true")
+              .tooltip.hidden
+              svg  
             each state in states
               if state.numDistricts > 2
-                div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-" + state.abbrev data-state = state.name data-title = "Partisan responsiveness")
+                div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-" + state.abbrev data-state = state.name data-title = "Partisan responsiveness" data-responsiveness = "true")
                   .tooltip.hidden
                   svg  
         .section#results

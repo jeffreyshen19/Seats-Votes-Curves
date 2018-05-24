@@ -1,7 +1,7 @@
 drawCurve("AL");
-drawHistoricalCurve("historical-gk-AL");
-drawHistoricalCurve("historical-responsiveness-AL");
-drawHistoricalCurve("historical-symmetry-AL");
+drawHistoricalCurve("historical-gk-us");
+drawHistoricalCurve("historical-responsiveness-us");
+drawHistoricalCurve("historical-symmetry-us");
 drawFigures();
 
 function drawFigures(){

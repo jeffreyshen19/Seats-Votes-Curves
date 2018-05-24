@@ -167,9 +167,9 @@ html(lang='en')
           .body
             each state in states
               if state.numDistricts > 2
-                div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")
+                div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016" data-districts = state.numDistricts)
                   .tooltip.hidden
-                  svg   
+                  svg
         .section#historical-trends 
           h1 Historical Trends in the Seats-Votes Curves
           h3 Partisan bias over time: 

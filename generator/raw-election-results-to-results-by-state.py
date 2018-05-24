@@ -51,7 +51,7 @@ with open(sys.argv[1], "rU") as csvfile:
                 dem = 0
 
             if votes == "Unopposed" or votes == "#":
-                votes = 0
+                votes = 100
 
             if party == "R":
                 rep += int(votes)

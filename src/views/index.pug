@@ -21,10 +21,8 @@ html(lang='en')
           p A historical primer on seat-votes curves and partisan bias, symmetry, and responsiveness, from 2000 - 2016.
           br
           h4 By Jeffrey Shen
+        i.attr Image courtesy of <a href ="https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg">Wikipedia</a>
       #body
-        br
-        i.attr Image source: https://commons.wikimedia.org/wiki/File:United_States_Capitol_west_front_edit2.jpg
-
         #table-of-contents.section
           .center-left
             h1 Table of Contents
@@ -142,6 +140,12 @@ html(lang='en')
               svg
           br
           p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
+          br
+          h3 Some notes on data collection
+          ul 
+            li For states such as Louisiana where there can be more than one Democrat or Republican running in the general election, the number of votes for each party was tallied as the total number of votes cast for candidates of that party.
+            li Uncontested district elections are treated as one party winning 100% of the vote, and the other party receiving 0% of the vote.
+            li Write-in candidates are not calculated for either party.
         .section#explore
           h1 Explore Seats-Votes Curves from 2000-2016 
           .sidebar 

@@ -39,7 +39,7 @@ h3{
   font-size: 1.25em;
 }
 
-p, a, ol{
+p, a, ol, ul{
   font-family: "libre_baskerville";
   line-height: 1.3em;
 }
@@ -56,11 +56,12 @@ ul li{
   list-style-type: disc;
 }
 
-ol {
+ol li{
+  list-style-type: decimal;
+}
+
+ol, ul {
   padding-left: 20px;
-  li{
-    list-style-type: decimal;
-  }
 }
 
 a{

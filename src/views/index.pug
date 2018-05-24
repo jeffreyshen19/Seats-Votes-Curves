@@ -4,7 +4,7 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name = "description" content = "A historical examination of seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.")
+    meta(name = "description" content = "A historical examination of seat-votes curves and partisan bias, symmetry, and responsiveness, from 2000 - 2016.")
     meta(name = "author" content = "Jeffrey Shen")
     title Exploring the Seats-Votes Curve
     link(href='bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css' rel='stylesheet' type='text/css')
@@ -18,7 +18,7 @@ html(lang='en')
         .overlay
         center 
           h1 Exploring the Seats-Votes Curve
-          p A historical primer on seat-votes curves and partisan bias, symmetry, and responsiveness, from 1980 - 2016.
+          p A historical primer on seat-votes curves and partisan bias, symmetry, and responsiveness, from 2000 - 2016.
           br
           h4 By Jeffrey Shen
       #body
@@ -34,7 +34,7 @@ html(lang='en')
               li 
                 a(href = "#methodology") Methodology
               li
-                a(href = "#explore") Explore Seats-Votes Curves from 1980 - 2016
+                a(href = "#explore") Explore Seats-Votes Curves from 2000 - 2016
               li 
                 a(href = "#historical-trends") Historical Trends in the Seats-Votes Curves 
               li 
@@ -143,7 +143,7 @@ html(lang='en')
           br
           p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
         .section#explore
-          h1 Explore Seats-Votes Curves from 1980-2016 
+          h1 Explore Seats-Votes Curves from 2000-2016 
           .sidebar 
             p Select year: 
             select#year-selecter(onchange = "redrawCurves()")

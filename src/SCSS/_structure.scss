@@ -97,5 +97,12 @@
   .tooltip{
     position: absolute;
     white-space: nowrap;
+    background: white;
+    padding: 10px;
+    box-sizing: border-box;
   }
+}
+
+#explore{
+  min-height: 600px;
 }

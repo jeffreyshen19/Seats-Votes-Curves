@@ -52,15 +52,19 @@ html(lang='en')
               | However, partisan bias only captures the characteristics of a seats-votes curve at the 50% vote share. Furthermore, since seats-votes curves are generated using computer algorithms—not real elections results—partisan bias is less accurate for non-competitive elections, where the vote share is far from 50%.  
             br
             div.graph-demonstration.hidden(id = "partisan-not-bias" data-height = "400" data-half = "true" data-caption = "A Seats-Votes Curve with Minimal Partisan Bias")
+              .tooltip
               svg
             div.graph-demonstration.hidden(id = "partisan-bias" data-height = "400" data-half = "true" data-caption = "A Seats-Votes Curve with Significant Partisan Bias")
+              .tooltip
               svg
             br
             li <i>Partisan Symmetry</i>: The average distance between the seats-votes curve of one party and that of the other party, over a range of vote shares (most commonly between 45% and 55% of the vote). It is widely agreed upon that both parties should receive the same percentage of seats at the same vote share in a "fair" districting plan. In other words, in a fair plan, Republicans can get 50% of the seats at 40% of the vote so long as Democrats also get 50% of the seats at 40% of the votes. Partisan symmetry measures how similar the seats-votes curve for Republicans is to the seats-votes curve for Democrats, thereby measuring the aforementioned standard. An ideal score would be 0%, meaning that the seats-votes curve for Republicans and Democrats are identical (symmetric) and the worse score is 50%.
             br
             div.graph-demonstration.hidden(id = "symmetric" data-height = "400" data-half = "true" data-caption = "A Symmetric Seats-Votes Curve")
+              .tooltip
               svg
             div.graph-demonstration.hidden(id = "not-symmetric" data-height = "400" data-half = "true" data-caption = "An Asymmetric Seats-Votes Curve")
+              .tooltip
               svg
             br 
             li <i>Responsiveness</i>: The average slope of the seats-votes curve, over a range of vote shares (most commonly between 45% and 55% of the vote). Unlike the previous two measures, there is no ideal responsiveness score; Rather, responsiveness describes how votes translate into seats in a state. A low responsiveness score (less than 1) would indicate an <i>incumbent protection gerrymander</i>, meaning that seat shares are unresponsive to changes in voting, and therefore the districting plan helps preserve the seats of incumbents, whether they be Democrat or Republican. A responsiveness score of approximately 1 would indicate a proportional districting plan, meaning a 1% vote increase translates into a 1% seat increase. A high responsiveness score (greater than 1) would indicate a heavy "winner-take-all" characteristic, meaning the majority party tends to win more seats than votes. Winner-take-all plans are characteristic of most American elections. Lastly, a responsiveness score around 2 would indicate a high level of compliance with the "Efficiency Gap" (EG), a recently developed measure of partisan gerrymandering that you can read about <a href = "https://www.brennancenter.org/sites/default/files/legal-work/How_the_Efficiency_Gap_Standard_Works.pdf" target = "_blank">here</a>.            
@@ -69,12 +73,16 @@ html(lang='en')
               | It's important to recognize that responsiveness does not favor one particular party; Low responsiveness protects incumbents of both parties (although there still may be a partisan bias, for example) and high responsiveness will always benefit the majority party. In this regard, responsiveness can be tweaked to benefit specific parties—say, a majority party wants to increase responsiveness to secure more seats—but there is no set standard for responsiveness.
             br
             div.graph-demonstration.hidden(id = "proportional" data-height = "400" data-half = "true" data-caption = "A Proportional Plan")
+              .tooltip
               svg
             div.graph-demonstration.hidden(id = "incumbent-protection" data-height = "400" data-half = "true" data-caption = "An Incumbent Protection Gerrymander")
+              .tooltip
               svg
             div.graph-demonstration.hidden(id = "winner-take-all" data-height = "400" data-half = "true" data-caption = "A Winner Take All Plan")
+              .tooltip
               svg
             div.graph-demonstration.hidden(id = "eg-optimized" data-height = "400" data-half = "true" data-caption = "An EG Optimized Plan")
+              .tooltip
               svg
         .section#methodology
           h1 Methodology
@@ -114,19 +122,23 @@ html(lang='en')
                 td(style = "font-style:italic;") 250
                 td(style = "font-style:italic;") 250
             div.graph-demonstration.hidden(id = "step-1" data-dots = "true" data-half = "true")
+              .tooltip
               svg
             br
             br
             li Add endpoints. For every state, 0% of the vote for one party will always result in 0% of the seats, and 100% of the vote for one party will always result in 100% of the seats. Therefore, the points (0,0) and (100,100) can be added to both the Democrat and Republican curve.  
             div.graph-demonstration.hidden(id = "step-2" data-dots = "true")
+              .tooltip
               svg
             br
             li Fill in the rest of the curve using an assumption known as <i>uniform partisan swing</i>, which assumes that each district is representative of the state as a whole (Clearly, this assumption is flawed, as districts are often not microcosms of states, but it is convenient for the purposes of generating a hypothetical seats-votes curve. The nature of this assumption means that seats-votes curves generally lose validity towards the extremes). Essentially, starting from the initial election results, add 1% of the vote share to one party, and decrease 1% of the vote share for the other party in each district. The change in vote share will eventually result in a change of seat shares state-wide, and the seat-votes curve will gradually be filled in from (0,0) to (100, 100) for both parties. 
             div.graph-demonstration.hidden(id = "step-3")
+              .tooltip
               svg
             br
             li The resulting seats-votes curve will be a step function, as under the uniform partisan swing model, votes don't smoothly translate into seats; There will be plateaus, followed by a vertical jump / fall when a district changes party hands. In order to smooth the curve out, apply a 5% (as per the findings of <i>Gerrymandering in America</i>) variation to the voting results in each district. So, instead of adding 1% to each district, add 1% plus a random number between -5% and 5%. This variation should be simulated 1000 times for each vote level and averaged out, resulting in a smoother curve.
             div.graph-demonstration.hidden(id = "step-4")
+              .tooltip
               svg
           br
           p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
@@ -152,6 +164,7 @@ html(lang='en')
           .body
             each state in states
               div.graph.hidden(id = state.abbrev data-state = state.name data-year = "2016")
+                .tooltip.hidden
                 svg   
         .section#historical-trends 
           h1 Historical Trends in the Seats-Votes Curves
@@ -165,6 +178,7 @@ html(lang='en')
           .body
             each state in states
               div.graph-historical-gk.hidden(id = "historical-gk-" + state.abbrev data-state = state.name data-title = "Partisan Bias")
+                .tooltip.hidden
                 svg  
           hr
           br
@@ -178,6 +192,7 @@ html(lang='en')
           .body
             each state in states
               div.graph-historical-symmetry.hidden(id = "historical-symmetry-" + state.abbrev data-state = state.name data-title = "Partisan symmetry")
+                .tooltip.hidden
                 svg  
           hr
           br
@@ -191,6 +206,7 @@ html(lang='en')
           .body
             each state in states
               div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-" + state.abbrev data-state = state.name data-title = "Partisan responsiveness")
+                .tooltip.hidden
                 svg  
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")

@@ -12,7 +12,7 @@ function drawHistoricalCurve(id){
 
   //Scale from 0 to 100%
   var x = d3.scalePoint().range([0, width]);
-  var y = d3.scaleLinear().range([height, 0]).domain([-100, 100]);
+  var y = d3.scaleLinear().range([height, 0]).domain([-50, 50]);
 
   //Make graph
   var tooltip = d3.select("#" + id).select(".tooltip");

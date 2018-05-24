@@ -64,7 +64,7 @@ for state in states:
     symmetry = symmetry / numNumbers
     responsiveness = responsiveness / numNumbers
 
-    partisan_bias = ((repUpperLimit - repLowerLimit) * (50 - starting) + repLowerLimit) - ((demUpperLimit - demLowerLimit) * (50 - starting) + demLowerLimit)
+    partisan_bias = ((repUpperLimit - repLowerLimit) * (50 - starting) + repLowerLimit) - 50
 
     outputFile.write(state + "," + str(partisan_bias) + "," + str(symmetry) + "," + str(responsiveness) + "\n")
 

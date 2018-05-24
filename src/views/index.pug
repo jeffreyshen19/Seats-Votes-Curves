@@ -38,9 +38,9 @@ html(lang='en')
               li 
                 a(href = "#historical-trends") Historical Trends in the Seats-Votes Curves 
               li 
-                a Results 
+                a(href = "#results") Results 
               li 
-                a Data and Sources
+                a(href = "#data") Data and Sources
         .section#what
           h1 What is the Seats-Votes Curve? 
           p The seats-votes curve is a computer generated graph that plots the portion of seats a party will win for a certain vote share. The shape of the seats-votes curve provides information on the partisan characteristics of a particular state, such as how election outcomes are effected by changes in voting and whether elections are fair to both parties. In particular, there are three main statistics that can be derived from it: 
@@ -208,6 +208,18 @@ html(lang='en')
               div.graph-historical-responsiveness.hidden(id = "historical-responsiveness-" + state.abbrev data-state = state.name data-title = "Partisan responsiveness")
                 .tooltip.hidden
                 svg  
+        .section#results
+          h1 Results
+        .section#data         
+          h1 Data and Sources
+          h3 Datasets used
+          p Election Results [csv]. (n.d.). Retrieved from https://transition.fec.gov/pubrec/<br>&emsp;&emsp;electionresults.shtml 
+          br
+          h3 Sources referenced
+          p McGann, A. J., Smith, C. A., Latner, M., & Keenan, A. (2016). <i>Gerrymandering in <br>&emsp;&emsp;America: The House of Representatives, the Supreme Court, and the future of<br>&emsp;&emsp;popular sovereignty</i>. Cambridge: Cambridge University Press. 
+          br
+          p Petry, E. (n.d.). <i>How the Efficiency Gap Works</i>. Retrieved May 24, 2018, from<br>&emsp;&emsp;Brennan Center for Justice website: https://www.brennancenter.org/sites/<br>&emsp;&emsp;default/files/legal-work/How_the_Efficiency_Gap_Standard_Works.pdf 
+          br
     script(src = "./bower_components/jquery/dist/jquery.min.js")
     script(src = "./bower_components/d3/d3.min.js")
     script(src = "./dist/script-min.js")

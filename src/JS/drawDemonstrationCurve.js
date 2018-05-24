@@ -31,23 +31,6 @@ function drawDemonstrationCurve(id){
   var svg = d3.select("#" + id).classed("hidden", false).select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .on("mouseover", function(d){
-
-    })
-    .on("mousemove", function(d){
-      mouseX = x.invert(d3.mouse(this)[0] - margin.left).toFixed(2);
-
-      if(mouseX < 0 || mouseX > 100) tooltip.classed("hidden", true);
-      else{
-        tooltip.classed("hidden", false)
-          .html("At " + mouseX + "% of vote:<br><br>")
-          .style("left", d3.mouse(this)[0] + 20 + "px")
-          .style("top", height - 30 + "px");
-      }
-    })
-    .on("mouseout", function(d){
-      tooltip.classed("hidden", true);
-    })
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

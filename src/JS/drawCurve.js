@@ -75,7 +75,7 @@ function drawCurve(id){
             .classed("hidden", false);
 
           tooltip.classed("hidden", false)
-            .html("<strong>At " + mouseX.toFixed(2) + "% of the Vote</strong>:<br>Republican Seat Share: " + datum.seatsR.toFixed(2) + "%<br>Democrat Seat Share: " + datum.seatsD.toFixed(2) + "%")
+            .html("<strong>At " + datum.votes.toFixed(2) + "% of the Vote</strong>:<br>Republican Seat Share: " + datum.seatsR.toFixed(2) + "%<br>Democrat Seat Share: " + datum.seatsD.toFixed(2) + "%")
             .style("left", (20 + mouse[0] + tooltip.node().offsetWidth > thisElement.node().offsetWidth ? mouse[0] - 20 - tooltip.node().offsetWidth : mouse[0] + 20) + "px")
             .style("top", mouse[1] - 30 + "px");
         }

@@ -75,7 +75,7 @@ function drawCurve(id){
             .classed("hidden", false);
 
           tooltip.classed("hidden", false)
-            .html("<strong>At " + mouseX.toFixed(2) + "% of the Vote</strong>:<br>Republican Seat Share: " + datum.seatsR.toFixed(2) + "%<br>Democrat Seat Share: " + datum.seatsD.toFixed(2) + "%")
+            .html("<strong>At " + datum.votes.toFixed(2) + "% of the Vote</strong>:<br>Republican Seat Share: " + datum.seatsR.toFixed(2) + "%<br>Democrat Seat Share: " + datum.seatsD.toFixed(2) + "%")
             .style("left", (20 + mouse[0] + tooltip.node().offsetWidth > thisElement.node().offsetWidth ? mouse[0] - 20 - tooltip.node().offsetWidth : mouse[0] + 20) + "px")
             .style("top", mouse[1] - 30 + "px");
         }
@@ -271,23 +271,6 @@ function drawDemonstrationCurve(id){
   var svg = d3.select("#" + id).classed("hidden", false).select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .on("mouseover", function(d){
-
-    })
-    .on("mousemove", function(d){
-      mouseX = x.invert(d3.mouse(this)[0] - margin.left).toFixed(2);
-
-      if(mouseX < 0 || mouseX > 100) tooltip.classed("hidden", true);
-      else{
-        tooltip.classed("hidden", false)
-          .html("At " + mouseX + "% of vote:<br><br>")
-          .style("left", d3.mouse(this)[0] + 20 + "px")
-          .style("top", height - 30 + "px");
-      }
-    })
-    .on("mouseout", function(d){
-      tooltip.classed("hidden", true);
-    })
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -407,34 +390,14 @@ function drawHistoricalCurve(id){
   var y = d3.scaleLinear().range([height, 0]).domain([-50, 50]);
 
   //Make graph
-  var tooltip = d3.select("#" + id).select(".tooltip");
-  var mouseX;
+  var thisElement = d3.select("#" + id);
+  var tooltip = thisElement.select(".tooltip");
 
-  var dataset = d3.select("#" + id).node().dataset;
+  var dataset = thisElement.node().dataset;
 
-  d3.select("#" + id).select('svg').selectAll("*").remove(); //Clear all past graph drawings
-  var svg = d3.select("#" + id).classed("hidden", false).classed("active-historical", true).select("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .on("mouseover", function(d){
+  thisElement.select('svg').selectAll("*").remove(); //Clear all past graph drawings
 
-    })
-    .on("mousemove", function(d){
-      mouseX = x.invert(d3.mouse(this)[0] - margin.left).toFixed(2);
-
-      if(mouseX < 0 || mouseX > 100) tooltip.classed("hidden", true);
-      else{
-        tooltip.classed("hidden", false)
-          .html("At " + mouseX + "% of vote:<br><br>")
-          .style("left", d3.mouse(this)[0] + 20 + "px")
-          .style("top", height - 30 + "px");
-      }
-    })
-    .on("mouseout", function(d){
-      tooltip.classed("hidden", true);
-    })
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var dot, tooltipLine, mouse, mouseX;
 
   d3.csv("../data/historical-results/" + title + "/" + state + ".csv", function(error, data){
     data.forEach(function(d){
@@ -442,6 +405,62 @@ function drawHistoricalCurve(id){
     });
 
     x.domain(data.map(function(d) { return d.year; }));
+    x.invert = d3.scaleQuantize().domain(x.range()).range(x.domain());
+
+    var svg = thisElement.classed("hidden", false).classed("active-historical", true).select("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .on("mousemove", function(d){
+        mouse = d3.mouse(this);
+        mouseX = x.invert(mouse[0] - margin.left);
+        index = 0;
+        var datum;
+
+        for(index = 0; index < data.length; index++) {
+          if(data[index].year == mouseX) {
+            datum = data[index];
+            break;
+          }
+        }
+
+        dot = thisElement.select(".dot");
+        tooltipLine = thisElement.select(".tooltip-line");
+
+        dot.attr("cx", x(datum.year))
+          .attr("cy", y(datum.y))
+          .classed("hidden", false);
+
+        tooltipLine.attr("x1", x(datum.year))
+          .attr("x2", x(datum.year))
+          .classed("hidden", false);
+
+        tooltip.classed("hidden", false)
+          .html("<strong>In " + datum.year + "</strong>:<br>" + dataset.title + ": " + datum.y.toFixed(2) + "%")
+          .style("left", (20 + mouse[0] + tooltip.node().offsetWidth > thisElement.node().offsetWidth ? mouse[0] - 20 - tooltip.node().offsetWidth : mouse[0] + 20) + "px")
+          .style("top", mouse[1] - 30 + "px");
+      })
+      .on("mouseout", function(d){
+        tooltip.classed("hidden", true);
+        dot.classed("hidden", true);
+        tooltipLine.classed("hidden", true);
+      })
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("circle")
+      .attr("class", "dot hidden")
+      .style("fill", "black")
+      .attr("r", 5);
+
+    svg.append("line")
+      .attr("class", "tooltip-line hidden")
+      .attr("x1", x(0))
+      .attr("y1", y(-50))
+      .attr("x2", x(0))
+      .attr("y2", y(50))
+      .style("stroke", "black")
+      .style("stroke-width", "1")
+      .style("stroke-dasharray", "5,5");
 
     //Add x axis w/ label
     svg.append("g")

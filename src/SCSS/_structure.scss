@@ -92,7 +92,7 @@
   display: none;
 }
 
-.graph, .graph-historical{
+.graph, .graph-historical-gk, .graph-historical-symmetry, .graph-historical-responsiveness{
   position: relative;
   .tooltip{
     position: absolute;
@@ -100,6 +100,12 @@
     background: white;
     padding: 10px;
     box-sizing: border-box;
+  }
+}
+
+.graph-historical-gk, .graph-historical-symmetry, .graph-historical-responsiveness{
+  .tooltip{
+    background: #EEEEEE;
   }
 }
 

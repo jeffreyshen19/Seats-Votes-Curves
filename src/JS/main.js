@@ -21,7 +21,9 @@ function drawFigures(){
 
 function redrawCurves(){
   drawCurve(d3.select(".active").attr('id'));
-  drawHistoricalCurve(d3.select(".active-historical").attr('id'));
+  drawHistoricalCurve(d3.select(".graph-historical-gk.active-historical").attr('id'));
+  drawHistoricalCurve(d3.select(".graph-historical-symmetry.active-historical").attr('id'));
+  drawHistoricalCurve(d3.select(".graph-historical-responsiveness.active-historical").attr('id'));
 }
 
 var resizeId;

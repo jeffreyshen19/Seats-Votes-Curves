@@ -41,15 +41,22 @@ with open(sys.argv[1], "rU") as csvfile:
                 stateNum += 1
                 currentAbbrev = states[stateNum]["abbrev"]
                 districtNum = district
+                rep = 0
+                dem = 0
 
             if district != districtNum: # Increment district
                 districtNum += 1
                 states[stateNum]["districts"].append(str(rep) + "," + str(dem))
+                rep = 0
+                dem = 0
+
+            if votes == "Unopposed" or votes == "#":
+                votes = 0
 
             if party == "R":
-                rep = votes
+                rep += int(votes)
             elif party == "D":
-                dem = votes
+                dem += int(votes)
 
 states[49]["districts"].append(str(rep) + "," + str(dem))
 

@@ -55,7 +55,7 @@ with open(sys.argv[1], "rU") as csvfile:
 
             if party == "R":
                 rep += int(votes)
-            elif party == "D":
+            elif party == "D" or party == "DFL":
                 dem += int(votes)
 
 states[49]["districts"].append(str(rep) + "," + str(dem))

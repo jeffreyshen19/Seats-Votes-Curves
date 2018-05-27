@@ -34,7 +34,7 @@ function drawCurve(id){
 
   thisElement.select('svg').selectAll("*").remove(); //Clear all past graph drawings
 
-  d3.csv("../data/seats-votes/" + year + "/" + id + ".csv", function(error, data){
+  d3.csv("./data/seats-votes/" + year + "/" + id + ".csv", function(error, data){
     data.forEach(function(d){
       d.votes = parseFloat(d.votes);
       d.seatsR = parseFloat(d.seatsR);
@@ -187,7 +187,7 @@ function drawCurve(id){
 
     //Load score data
     if(scoreData["" + year] == null){
-      d3.csv("../data/seats-votes-scores/" + year + ".csv", function(error, data){
+      d3.csv("./data/seats-votes-scores/" + year + ".csv", function(error, data){
         scoreData["" + year] = [];
         data.forEach(function(d){
           if(d.state == id){
@@ -301,7 +301,7 @@ function drawDemonstrationCurve(id){
     .attr("class", "axis-label")
     .text("Percentage of Seats");
 
-  d3.csv("../data/demo/" + id + ".csv", function(error, data){
+  d3.csv("./data/demo/" + id + ".csv", function(error, data){
     data.forEach(function(d){
       d.votes = parseFloat(d.votes);
       d.seatsR = parseFloat(d.seatsR);
@@ -401,7 +401,7 @@ function drawHistoricalCurve(id){
 
   var dot, tooltipLine, mouse, mouseX;
 
-  d3.csv("../data/historical-results/" + title + "/" + state + ".csv", function(error, data){
+  d3.csv("./data/historical-results/" + title + "/" + state + ".csv", function(error, data){
     data.forEach(function(d){
       d.y = parseFloat(d.y);
     });

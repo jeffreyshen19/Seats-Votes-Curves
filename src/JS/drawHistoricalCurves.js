@@ -26,7 +26,7 @@ function drawHistoricalCurve(id){
 
   var dot, tooltipLine, mouse, mouseX;
 
-  d3.csv("../data/historical-results/" + title + "/" + state + ".csv", function(error, data){
+  d3.csv("./data/historical-results/" + title + "/" + state + ".csv", function(error, data){
     data.forEach(function(d){
       d.y = parseFloat(d.y);
     });

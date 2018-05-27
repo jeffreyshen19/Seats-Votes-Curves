@@ -61,7 +61,7 @@ function drawDemonstrationCurve(id){
     .attr("class", "axis-label")
     .text("Percentage of Seats");
 
-  d3.csv("../data/demo/" + id + ".csv", function(error, data){
+  d3.csv("./data/demo/" + id + ".csv", function(error, data){
     data.forEach(function(d){
       d.votes = parseFloat(d.votes);
       d.seatsR = parseFloat(d.seatsR);

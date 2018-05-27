@@ -141,12 +141,13 @@ html(lang='en')
           br
           p Source code for the algorithm to generate seats-votes curves is available <a href = "https://github.com/jeffreyshen19/Seats-Votes-Curves/blob/master/generator/uniform_partisan_swing.py">here</a>.
           br
-          h3 Some additional notes
+          h3 Assumptions Made / Special Notes
           ul 
-            li For states such as Louisiana where there can be more than one Democrat or Republican running in the general election, the number of votes for each party was tallied as the total number of votes cast for candidates of that party.
             li Uncontested districts are treated as one party garnering 75% of the vote, and the other party garnering 25% of the vote. 
+            li Under the uniform partisan swing algorithm described above it is possible for the vote share in a district to go over 100%, which is clearly unrealistic. The seats-votes curves generated below cap off the vote share in any district at 100%, with the excess being distributed evenly across the other districts.
             li Write-in candidates are not calculated for either party.
             li Third party candidates are not included in the calculations.
+            li For Louisiana, where there can be more than one Democrat or Republican running in the general election, the number of votes for each party was tallied as the total number of votes cast for candidates of that party.
             li States with less than 5 districts have been excluded from the graphs below, as they lack a large enough sample size for an accurate curve.
             li Theoretically, the seat share for Republicans and Democrats at 50% of the vote should add up to 100%. However, with the seats-votes curves generated below, the seat shares don't always add up to exactly 100% due to factors such as computational inaccuracies (especially in highly uncompetitive elections), third party candidates, and other factors. 
         .section#explore

@@ -84,7 +84,7 @@ for year in years:
     numElements = 0
 
     for i in range(0, len(states)):
-        if states[i]["numDistricts"] > 2:
+        if states[i]["numDistricts"] > 4:
             gkAv += float(inputFile["data"][i]["gk_bias"])
             numElements += 1
 
@@ -105,7 +105,7 @@ for year in years:
     numElements = 0
 
     for i in range(0, len(states)):
-        if states[i]["numDistricts"] > 2:
+        if states[i]["numDistricts"] > 4:
             responsiveAv += float(inputFile["data"][i]["responsiveness"])
             numElements += 1
 
@@ -126,7 +126,7 @@ for year in years:
     numElements = 0
 
     for i in range(0, len(states)):
-        if states[i]["numDistricts"] > 2:
+        if states[i]["numDistricts"] > 4:
             symmetryAv += float(inputFile["data"][i]["symmetry"])
             numElements += 1
 

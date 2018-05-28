@@ -3,7 +3,8 @@ import csv
 
 # Gets details such as partisan bias, symmetry, and responsiveness from a seats votes curve and writes to a master csv
 
-states = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC", "ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+states = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC", "ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","WA","WV","WI","WY"]
+#,"VT","VA","WA","WV","WI","WY"]
 
 outputFile = open(sys.argv[1],"w")
 inputFolder = sys.argv[2]

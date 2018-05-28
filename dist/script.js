@@ -134,7 +134,7 @@ function drawCurve(id){
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axis-label")
-      .text("Percentage of Seats (" + dataset.districts + " seats total)");
+      .text("Percentage of Seats");
 
     //Set up lines
     var republicanLine = d3.line()

@@ -21,7 +21,7 @@ for year in years:
 
 for state in states:
     # Generate partisan bias
-    outputFile = open("data/historical-results/gk/" + state["name"] + ".csv","w")
+    outputFile = open("data/historical-results/gk/" + state["abbrev"] + ".csv","w")
     outputFile.write("year,y\n")
     for year in years:
         inputFile = inputFiles[0]
@@ -38,7 +38,7 @@ for state in states:
     outputFile.close()
 
     # Generate symmetry
-    outputFile = open("data/historical-results/symmetry/" + state["name"] + ".csv","w")
+    outputFile = open("data/historical-results/symmetry/" + state["abbrev"] + ".csv","w")
     outputFile.write("year,y\n")
     for year in years:
         inputFile = inputFiles[0]
@@ -55,7 +55,7 @@ for state in states:
     outputFile.close()
 
     # Generate responsiveness
-    outputFile = open("data/historical-results/responsiveness/" + state["name"] + ".csv","w")
+    outputFile = open("data/historical-results/responsiveness/" + state["abbrev"] + ".csv","w")
     outputFile.write("year,y\n")
     for year in years:
         inputFile = inputFiles[0]

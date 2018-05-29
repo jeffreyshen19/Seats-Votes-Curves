@@ -24,7 +24,7 @@
       top: 0;
       left: 0;
       position: absolute;
-      filter: blur(4px) brightness(0.9) contrast(0.8);
+      filter: contrast(0.3) brightness(0.9);
       background-position: center top;
       background-size: cover;
       background-repeat: no-repeat;
@@ -33,14 +33,25 @@
     }
 
     center{
+      // text-align: left;
       top: 50%;
       transform: translateY(-50%);
       position: relative;
-      color: #ececec;
+      color: #fff;
       z-index: 50;
       padding: 0 10px;
       a{
-        color: #ececec;
+        color: #fff;
+      }
+
+
+      h3{
+        font-family: gotham_light;
+      }
+
+      p{
+        font-weight: bold;
+        font-size: 1.15em;
       }
 
       h1{

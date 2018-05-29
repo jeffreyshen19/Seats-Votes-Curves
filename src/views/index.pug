@@ -38,6 +38,8 @@ html(lang='en')
                 a(href = "#historical-trends") Historical Trends in the Seats-Votes Curves 
               li 
                 a(href = "#data") Bibliography
+              li 
+                a(href = "https://github.com/jeffreyshen19/Seats-Votes-Curves") View Source Code
         .section#what
           h1 What is the Seats-Votes Curve? 
           p The seats-votes curve is a computer generated graph that plots the portion of seats a party will win for a certain vote share. The shape of the seats-votes curve provides information on the partisan characteristics of a particular state, such as how election outcomes are effected by changes in voting and whether elections are fair to both parties. In particular, there are three main statistics that can be derived from it: 
@@ -87,7 +89,7 @@ html(lang='en')
           p The seats-votes curve is generated using mostly hypothetical, computer generated election results:
           br
           ol
-            li Start with the actual voting result for the state. Say, Democrats won 50% of the vote but 60% of the seats in the states overall. Then, we could plot the point (50, 60) on the Democrat curve, and (50, 40) on the Republican curve. 
+            li Start with the actual voting result for the state. Say (as seen in the table below), Democrats won 50% of the vote but 60% of the seats in the states overall. Then, we could plot the point (50, 60) on the Democrat curve, and (50, 40) on the Republican curve (as seen in the graph below). 
             br
             table
               tr
@@ -133,7 +135,7 @@ html(lang='en')
               .tooltip
               svg
             br
-            li The resulting seats-votes curve will be a step function, as under the uniform partisan swing model, votes don't smoothly translate into seats; There will be plateaus, followed by a vertical jump / fall when a district changes party hands. In order to smooth the curve out, apply a 5% (as per the findings of <i>Gerrymandering in America</i>) variation to the voting results in each district. So, instead of adding 1% to each district, add 1% plus a random number between -5% and 5%. This variation should be simulated 1000 times for each vote level and averaged out, resulting in a smoother curve.
+            li The resulting seats-votes curve will be a step function, as under the uniform partisan swing model, votes don't smoothly translate into seats; There will be plateaus, followed by a vertical jump / fall when a district changes party hands. In order to smooth the curve out, apply a 5% (as per the findings of <i>Gerrymandering in America</i>) variation to the voting results in each district. The goal of adding a 5% random variation is to simulate the small factor of randomness present in each election. So, instead of adding 1% to each district, add 1% plus a random number between -5% and 5%. This variation should be simulated 1000 times for each vote level and averaged out, resulting in a smoother curve.
             div.graph-demonstration.hidden(id = "step-4")
               .tooltip
               svg
@@ -142,13 +144,13 @@ html(lang='en')
           br
           h3 Assumptions Made / Special Notes
           ul 
-            li Uncontested districts are treated as one party garnering 75% of the vote, and the other party garnering 25% of the vote. 
+            li Uncontested districts (district where only one party produced candidates) technically have a vote share of 100% to 0%. However, treating uncontested districts as such in the seats-votes algorithm would skew data on a statewide scale. Therefore, we assume that in uncontested districts, the non-represented party would have garnered 25% of the vote had it run in the district. So, instead of a 100-0 vote split, uncontested districts have a 75-25 vote split (25% was chosen-albeit arbitrarily-because it was assumed that uncontested districts are by nature uncompetitive, but not so uncompetitive as to garner 0%).
             li Under the uniform partisan swing algorithm described above it is possible for the vote share in a district to go over 100%, which is clearly unrealistic. The seats-votes curves generated below cap off the vote share in any district at 100%, with the excess being distributed evenly across the other districts.
             li Write-in candidates are not calculated for either party.
-            li Third party candidates are not included in the calculations.
+            li Third party candidates are not included in the calculations, as America lacks major third-parties on a national scale. Therefore, potential generation of a seats-votes curve for third parties would likely be skewed.
             li For Louisiana, where there can be more than one Democrat or Republican running in the general election, the number of votes for each party was tallied as the total number of votes cast for candidates of that party.
             li States with less than 5 districts have been excluded from the graphs below, as they lack a large enough sample size for an accurate curve.
-            li Theoretically, the seat share for Republicans and Democrats at 50% of the vote should add up to 100%. However, with the seats-votes curves generated below, the seat shares don't always add up to exactly 100% due to factors such as computational inaccuracies, third party candidates, highly uncompetitive or uncontested elections, amongst other factors. 
+            li Theoretically, the seat share for Republicans and Democrats at 50% of the vote should add up to 100%. However, with the seats-votes curves generated below, the seat shares don't always add up to exactly 100% due to factors such as computational inaccuracies, third party candidates, highly uncompetitive or uncontested elections, etc. 
         .section#explore
           h1 Explore Seats-Votes Curves from 2000-2016 
           .sidebar 
